@@ -16,6 +16,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "jest-preset-typescript-react-native": "^1.2.0",
     "ramda": "^0.25.0",
     "react": "16.3.1",
     "react-native": "0.55.4",
@@ -35,7 +36,9 @@
   "devDependencies": {
     "babel-jest": "23.0.1",
     "babel-preset-react-native": "4.0.0",
+    "husky": "^0.14.3",
     "jest": "23.1.0",
+    "lint-staged": "^7.2.0",
     "prettier": "^1.13.5",
     "react-native-typescript-transformer": "^1.2.10",
     "react-test-renderer": "16.3.1",
