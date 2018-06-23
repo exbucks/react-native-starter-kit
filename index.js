@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import App from './src/containers/app';
 
-AppRegistry.registerComponent('CClub', () => App);
+AppRegistry.registerComponent('Reel', () => App);
