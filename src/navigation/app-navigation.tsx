@@ -132,7 +132,7 @@ const AppNavigation = StackNavigator(
   {
     // Default config for all screens
     // headerMode: 'none',
-    initialRouteName: 'login',
+    initialRouteName: 'launch',
     mode: 'card',
     navigationOptions: {},
     transitionConfig: TransitionConfiguration,
