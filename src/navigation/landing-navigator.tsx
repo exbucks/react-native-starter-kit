@@ -24,12 +24,12 @@ const LandingNavigator = StackNavigator(
     signup: {
       screen: SignUpScreen,
       navigationOptions: {},
-    }
+    },
   },
   {
     initialRouteName: 'launch',
     headerMode: 'none',
-    navigationOptions: {}
+    navigationOptions: {},
   },
 )
 
