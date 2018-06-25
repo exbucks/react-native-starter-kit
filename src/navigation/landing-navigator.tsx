@@ -24,12 +24,20 @@ const LandingNavigator = StackNavigator(
     signup: {
       screen: SignUpScreen,
       navigationOptions: {},
+<<<<<<< HEAD
     },
+=======
+    }
+>>>>>>> Refactor navigation flow
   },
   {
     initialRouteName: 'launch',
     headerMode: 'none',
+<<<<<<< HEAD
     navigationOptions: {},
+=======
+    navigationOptions: {}
+>>>>>>> Refactor navigation flow
   },
 )
 
