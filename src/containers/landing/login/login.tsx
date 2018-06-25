@@ -2,33 +2,33 @@ import * as React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
-import AppActions from '../../actions/app'
-import * as screenStyles from './launch.styles'
+import AppActions from '../../../actions/app'
+import * as screenStyles from './login.styles'
 
-export interface LaunchScreenProps extends NavigationScreenProps<{}> {
+export interface LoginScreenProps extends NavigationScreenProps<{}> {
   status: boolean
   loginRequest?: () => void
 }
 
-export interface LaunchScreenState {
+export interface LoginScreenState {
   isBusy: boolean
 }
 
-class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
+class Login extends React.Component<LoginScreenProps, LoginScreenState> {
   constructor(props) {
     super(props)
     this.state = { isBusy: false }
   }
 
   toLogin = () => {
-    this.props.navigation.navigate('login')
+    this.props.navigation.navigate('pin')
   }
 
   render() {
     return (
       <View style={screenStyles.ROOT}>
         <TouchableOpacity onPress={this.toLogin}>
-          <Text>WELCOME</Text>
+          <Text>LOGIN</Text>
         </TouchableOpacity>
       </View>
     )
@@ -43,4 +43,4 @@ const mapDispatchToProps = dispatch => ({
   loginRequest: () => dispatch(AppActions.loginRequest()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Launch)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

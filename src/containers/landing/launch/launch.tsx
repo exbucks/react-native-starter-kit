@@ -3,18 +3,18 @@ import { Text, TouchableOpacity, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import AppActions from '../../../actions/app'
-import * as screenStyles from './home.styles'
+import * as screenStyles from './launch.styles'
 
-export interface HomeScreenProps extends NavigationScreenProps<{}> {
+export interface LaunchScreenProps extends NavigationScreenProps<{}> {
   status: boolean
   loginRequest?: () => void
 }
 
-export interface HomeScreenState {
+export interface LaunchScreenState {
   isBusy: boolean
 }
 
-class Add extends React.Component<HomeScreenProps, HomeScreenState> {
+class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
   constructor(props) {
     super(props)
     this.state = { isBusy: false }
@@ -28,7 +28,7 @@ class Add extends React.Component<HomeScreenProps, HomeScreenState> {
     return (
       <View style={screenStyles.ROOT}>
         <TouchableOpacity onPress={this.toLogin}>
-          <Text>HOME</Text>
+          <Text>WELCOME</Text>
         </TouchableOpacity>
       </View>
     )
@@ -43,4 +43,4 @@ const mapDispatchToProps = dispatch => ({
   loginRequest: () => dispatch(AppActions.loginRequest()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Add)
+export default connect(mapStateToProps, mapDispatchToProps)(Launch)

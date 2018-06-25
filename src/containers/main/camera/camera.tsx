@@ -28,15 +28,11 @@ class Add extends React.Component<AddScreenProps, AddScreenState> {
     return (
       <View style={screenStyles.ROOT}>
         <TouchableOpacity onPress={this.toLogin}>
-          <Text>Add</Text>
+          <Text>CAMERA</Text>
         </TouchableOpacity>
       </View>
     )
   }
-
-  static navigationOptions = ({ navigation }) => ({
-    title: 'TAB 5',
-  })
 }
 
 const mapStateToProps = state => ({

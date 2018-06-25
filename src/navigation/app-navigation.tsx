@@ -2,8 +2,7 @@ import * as React from 'react'
 import { Animated, Easing, Image } from 'react-native'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import IonIcons from 'react-native-vector-icons/Ionicons'
-import Launch from '../containers/launch'
-import Login from '../containers/login'
+import LandingNavigator from './landing-navigator'
 import HomeNavigator from './home-navigator'
 import CameraNavigator from './camera-navigator'
 import ExplorerNavigator from './explorer-navigator'
@@ -71,6 +70,7 @@ const TransitionConfiguration = () => {
   }
 }
 
+
 const Main = TabNavigator(
   {
     Explorer: {
@@ -100,17 +100,9 @@ const Main = TabNavigator(
 
 const AppNavigation = StackNavigator(
   {
-    launch: {
-      screen: Launch,
-      navigationOptions: {
-        header: null,
-      },
-    },
-    login: {
-      screen: Login,
-      navigationOptions: {
-        header: null,
-      },
+    landing: {
+      screen: LandingNavigator,
+      navigationOptions: {},
     },
     main: {
       screen: Main,
@@ -131,8 +123,8 @@ const AppNavigation = StackNavigator(
   },
   {
     // Default config for all screens
-    // headerMode: 'none',
-    initialRouteName: 'login',
+    headerMode: 'none',
+    initialRouteName: 'landing',
     mode: 'card',
     navigationOptions: {},
     transitionConfig: TransitionConfiguration,
