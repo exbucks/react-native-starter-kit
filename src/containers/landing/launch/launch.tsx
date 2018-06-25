@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Text, TouchableOpacity, View, Image } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
-import AppActions from '../../actions/app'
+import AppActions from '../../../actions/app'
 import * as screenStyles from './launch.styles'
 
 export interface LaunchScreenProps extends NavigationScreenProps<{}> {

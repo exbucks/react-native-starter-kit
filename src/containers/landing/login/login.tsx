@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
-import AppActions from '../../actions/app'
+import AppActions from '../../../actions/app'
 import * as screenStyles from './login.styles'
 
 export interface LoginScreenProps extends NavigationScreenProps<{}> {
@@ -21,7 +21,7 @@ class Login extends React.Component<LoginScreenProps, LoginScreenState> {
   }
 
   toLogin = () => {
-    this.props.navigation.navigate('main')
+    this.props.navigation.navigate('pin')
   }
 
   render() {

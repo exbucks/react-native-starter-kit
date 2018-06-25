@@ -28,15 +28,11 @@ class ExplorerScreen extends React.Component<ExplorerScreenProps, ExplorerScreen
     return (
       <View style={screenStyles.ROOT}>
         <TouchableOpacity onPress={this.toLogin}>
-          <Text>Add</Text>
+          <Text>EXPLORER</Text>
         </TouchableOpacity>
       </View>
     )
   }
-
-  static navigationOptions = ({ navigation }) => ({
-    title: 'TAB 5',
-  })
 }
 
 const mapStateToProps = state => ({
