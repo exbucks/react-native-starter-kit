@@ -434,6 +434,32 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@types/react-native@*", "@types/react-native@^0.55.23":
+  version "0.55.23"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.55.23.tgz#009924eff4ad0e5d7170606f515dd4853773271f"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-navigation@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@types/react-navigation/-/react-navigation-2.0.7.tgz#215cd094465dc8d5c422169aa86da6bf08971a2a"
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-redux@^6.0.2":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.2.tgz#10069b53db8e0920fd8656e068dcf10c53c9ad2a"
+  dependencies:
+    "@types/react" "*"
+    redux "^4.0.0"
+
+"@types/react@*", "@types/react@^16.4.1":
+  version "16.4.1"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.1.tgz#c53bbfb4a78933db587da085ac60dbf5fcf73f8f"
+  dependencies:
+    csstype "^2.2.0"
+
 abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -2019,6 +2045,10 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   resolved "https://registry.yarnpkg.com/cssstyle/-/cssstyle-0.3.1.tgz#6da9b4cff1bc5d716e6e5fe8e04fcb1b50a49adf"
   dependencies:
     cssom "0.3.x"
+
+csstype@^2.2.0:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.5.tgz#4125484a3d42189a863943f23b9e4b80fedfa106"
 
 dashdash@^1.12.0:
   version "1.14.1"
