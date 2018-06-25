@@ -39,6 +39,11 @@
     "tslint": "^5.10.0",
     "typescript": "^2.9.2"
   },
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts/"
+    ]
+  },
   "jest": {
     "preset": "react-native"
   }
