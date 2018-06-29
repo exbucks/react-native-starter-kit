@@ -21,11 +21,11 @@ class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
   }
 
   toLogin = () => {
-    this.props.navigation.navigate('login')
+    this.props.navigation.navigate('pin', { from: 'login'})
   }
 
-  toRegister = () => {
-    console.log('clicked create account')
+  toSignup = () => {
+    this.props.navigation.navigate('pin', { from: 'signup'})
   }
 
   render() {
@@ -43,7 +43,7 @@ class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
         </Text>
         <TouchableOpacity
           style={[screenStyles.loginButton, { backgroundColor: 'white' }]}
-          onPress={this.toLogin}
+          onPress={this.toSignup}
         >
           <Text style={screenStyles.registerText}>Create an Account</Text>
         </TouchableOpacity>
