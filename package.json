@@ -26,6 +26,7 @@
   "devDependencies": {
     "@types/react": "^16.4.1",
     "@types/react-native": "^0.55.23",
+    "@types/react-native-vector-icons": "^4.6.1",
     "@types/react-navigation": "^2.0.7",
     "@types/react-redux": "^6.0.2",
     "babel-jest": "23.0.1",
