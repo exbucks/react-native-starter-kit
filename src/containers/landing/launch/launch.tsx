@@ -34,7 +34,7 @@ class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
         <Image
           resizeMode="cover"
           style={screenStyles.backgroundImage}
-          source={require('../../assets/img/girl.jpg')}
+          source={require('../../../assets/img/girl.jpg')}
         />
         <Text
           style={screenStyles.logoText}
