@@ -1,5 +1,5 @@
 import { ViewStyle, TextStyle, ImageStyle, Dimensions } from 'react-native'
-import { colors } from '../../themes'
+import { colors } from '../../../themes'
 const window = Dimensions.get('window')
 
 export const ROOT: ViewStyle = {
