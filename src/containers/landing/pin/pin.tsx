@@ -4,6 +4,7 @@ import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import { create } from 'apisauce'
 import * as qs from 'query-string'
+import { parseNumber, formatNumber } from 'libphonenumber-js'
 import AppActions from '../../../actions/app'
 import { BackButton } from '../../../components/shared'
 import * as screenStyles from './pin.styles'
@@ -139,7 +140,18 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
       AUTH_KEY: this.AUTH_KEY,
     })
     const response = await this.api.post('get_challenge_token', reqBody)
-    console.log('*********', response)
+  }
+
+  formatNumber = () => {
+    const { phoneNumber } = this.state
+    const parsed = parseNumber(phoneNumber, 'US')
+    const number = formatNumber(parsed, 'National')
+    return number
+  }
+
+  resendCode = () => {
+    alert(`We're sending another code to ${this.formatNumber()}. Please wait up to 3 minutes before requesting another`)
+    this.submitNumber()
   }
 
   render() {
@@ -233,7 +245,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
               </Text>
             )}
             <TouchableOpacity
-              onPress={() => {}}
+              onPress={() => this.resendCode()}
               style={[screenStyles.sendButton, { marginTop: 0 }]}
             >
               <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>

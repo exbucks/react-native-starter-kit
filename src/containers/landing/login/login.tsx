@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Text, TouchableOpacity, View, ScrollView, Image, TextBase } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
+import { create } from 'apisauce'
 import * as qs from 'query-string'
 import AppActions from '../../../actions/app'
 import * as screenStyles from './login.styles'
-import { create } from 'apisauce'
 
 export interface LoginScreenProps extends NavigationScreenProps<{}> {
   status: boolean
@@ -31,7 +31,7 @@ class Login extends React.Component<LoginScreenProps, LoginScreenState> {
       phoneNumber: phoneNumber,
       accounts: [],
     }
-    console.log('*****', phoneNumber)
+
     this.api = create({
       baseURL: this.BASE_URL,
       headers: {
@@ -42,8 +42,22 @@ class Login extends React.Component<LoginScreenProps, LoginScreenState> {
     this.getProfiles()
   }
 
-  toLogin = () => {
-    this.props.navigation.navigate('pin')
+  gotoHome = async(index) => {
+    const { accounts, phoneNumber } = this.state
+    const reqBody = qs.stringify({
+      AUTH_KEY: this.AUTH_KEY,
+      user_name: accounts[index].user_handle,
+      password: phoneNumber,
+    })
+    const response = await this.api.post('user_login', reqBody)
+    if (!response.data) {
+      return false
+    }
+    if (response.data.status === 'success') {
+      this.props.navigation.navigate('main')
+    } else {
+      console.log('login request failed!', response.data.message)
+    }
   }
 
   getProfiles = async() => {
@@ -55,7 +69,6 @@ class Login extends React.Component<LoginScreenProps, LoginScreenState> {
     })
 
     const response = await this.api.post('show_users_with_phone', reqBody)
-    console.log('*********', response)
     this.setState({ accounts: response.data })
   }
 
@@ -77,9 +90,7 @@ class Login extends React.Component<LoginScreenProps, LoginScreenState> {
                 <TouchableOpacity
                   style={screenStyles.profileButton}
                   key={`profile${index}`}
-                  onPress={() => {
-                    console.log('*****', index, profileImage)
-                  }}
+                  onPress={() => this.gotoHome(index)}
                 >
                   <View style={screenStyles.profileContainer}>
                     <Image source={{uri: profileImage}} style={screenStyles.profileImage}/>
