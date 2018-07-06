@@ -4,6 +4,7 @@ const window = Dimensions.get('window')
 
 export const ROOT: ViewStyle = {
   flex: 1,
+  padding: 40,
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: colors.purple,
@@ -12,7 +13,7 @@ export const ROOT: ViewStyle = {
 export const logoText: TextStyle = {
   backgroundColor: 'transparent',
   position: 'absolute',
-  top: window.height / 2 - 200,
+  top: window.height / 2 - 230,
   left: window.width / 2,
   marginLeft: -80,
   fontFamily: 'Pacifico',
@@ -33,4 +34,66 @@ export const backgroundImage: ImageStyle = {
   right: 0,
   width: window.width,
   height: window.height + 50,
+}
+
+export const introText: TextStyle = {
+  color: colors.white,
+  textAlign: 'center',
+  fontSize: 15,
+  width: '85%',
+}
+
+export const middleArea: ViewStyle = {
+  width: '100%',
+  marginVertical: 10,
+}
+
+export const codeArea: ViewStyle = {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginVertical: 5,
+}
+
+export const codeTextInput: TextStyle = {
+  borderWidth: 0.5,
+  textAlign: 'center',
+  height: 40,
+  margin: 5,
+  borderColor: colors.transparent,
+  borderRadius: 20,
+  padding: 10,
+  backgroundColor: '#f5f5f5',
+  color: '#666',
+  fontSize: 14,
+}
+
+export const sendButton: ViewStyle = {
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 20,
+  height: 40,
+  margin: 5,
+}
+
+export const buttonText: TextStyle = {
+  color: colors.white,
+  fontSize: 14,
+}
+
+export const bottomArea: ViewStyle = {
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  bottom: 20,
+  height: 60,
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
+
+export const bottomText: TextStyle = {
+  color: colors.white,
+  fontSize: 14,
+  marginRight: 10,
 }
