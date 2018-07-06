@@ -62,6 +62,7 @@
 		E34AF7D23DA34AB7881364E1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD1F4FC86D8428ABBD0DFC3 /* libz.tbd */; };
 		9FF83E45BC9542C7B32A6ED6 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AF40F847C884140B8A86200 /* libRNSVG.a */; };
 		97736D5EA4F54554B8B900AB /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8363B15BE6BA4BAAA75D162B /* libRNSVG-tvOS.a */; };
+		D0E94030294B44688E181468 /* varelaround_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 161C80A6BD894FD5BC883F93 /* varelaround_regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,6 +432,7 @@
 		18A24B8C09F34F8BA3A0E168 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		4AF40F847C884140B8A86200 /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		8363B15BE6BA4BAAA75D162B /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; name = "libRNSVG-tvOS.a"; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		161C80A6BD894FD5BC883F93 /* varelaround_regular.ttf */ = {isa = PBXFileReference; name = "varelaround_regular.ttf"; path = "../src/assets/fonts/varelaround_regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -641,6 +643,7 @@
 				2BFC951E547E4F3FB21DF3B3 /* pacifico_regular.ttf */,
 				C6D47B98A5784060937843B8 /* righteous.ttf */,
 				21679C660E9B409292FA465D /* roboto.ttf */,
+				161C80A6BD894FD5BC883F93 /* varelaround_regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1279,6 +1282,7 @@
 				BFC5688B848C4F4B9A1364BB /* pacifico_regular.ttf in Resources */,
 				494F661E0BC346B0AD5210EB /* righteous.ttf in Resources */,
 				D7C5FA385C684056B8E01729 /* roboto.ttf in Resources */,
+				D0E94030294B44688E181468 /* varelaround_regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
