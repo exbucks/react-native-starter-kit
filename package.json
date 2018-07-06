@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "apisauce": "^0.15.2",
+    "libphonenumber-js": "^1.2.15",
     "query-string": "^6.1.0",
     "ramda": "^0.25.0",
     "react": "16.3.1",
