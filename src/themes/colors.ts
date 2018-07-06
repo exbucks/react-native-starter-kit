@@ -10,6 +10,7 @@ const colors = {
   white: 'rgb(255,255,255)',
   purple: '#8A84D6',
   shadowColor: '#00000020',
+  grey33: '#4040433',
 }
 
 export default colors

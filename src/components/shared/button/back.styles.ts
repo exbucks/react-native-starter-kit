@@ -3,7 +3,7 @@ import { isIPhoneX } from '../../../services'
 
 export const ROOT: ViewStyle = {
   position: 'absolute',
-  left: 5,
+  left: 0,
   top: isIPhoneX() ? 40 : 15,
 }
 
