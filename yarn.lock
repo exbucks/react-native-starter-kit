@@ -434,6 +434,10 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@types/query-string@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@types/query-string/-/query-string-6.1.0.tgz#5f721f9503bdf517d474c66cf4423da5dd2d5698"
+
 "@types/react-native-vector-icons@^4.6.1":
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-4.6.1.tgz#a9b2ee1a4b297b87a9917337aeee404c36fda8c2"
@@ -769,6 +773,13 @@ apisauce@0.14.3:
     axios "^0.16.2"
     ramda "^0.24.1"
 
+apisauce@^0.15.2:
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/apisauce/-/apisauce-0.15.2.tgz#89c8dfd353bf2f3202a59d7f817eba7ec1c3b0dd"
+  dependencies:
+    axios "^0.18.0"
+    ramda "^0.25.0"
+
 app-module-path@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/app-module-path/-/app-module-path-2.2.0.tgz#641aa55dfb7d6a6f0a8141c4b9c0aa50b6c24dd5"
@@ -930,6 +941,13 @@ axios@^0.16.2:
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.16.2.tgz#ba4f92f17167dfbab40983785454b9ac149c3c6d"
   dependencies:
     follow-redirects "^1.2.3"
+    is-buffer "^1.1.5"
+
+axios@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
+  dependencies:
+    follow-redirects "^1.3.0"
     is-buffer "^1.1.5"
 
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
@@ -2654,7 +2672,7 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-follow-redirects@^1.2.3:
+follow-redirects@^1.2.3, follow-redirects@^1.3.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.0.tgz#234f49cf770b7f35b40e790f636ceba0c3a0ab77"
   dependencies:
@@ -5226,6 +5244,13 @@ qs@^6.5.1, qs@~6.5.1:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
+query-string@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.1.0.tgz#01e7d69f6a0940dac67a937d6c6325647aa4532a"
+  dependencies:
+    decode-uri-component "^0.2.0"
+    strict-uri-encode "^2.0.0"
+
 radio-symbol@^0.2.1:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/radio-symbol/-/radio-symbol-0.2.3.tgz#51b7c2eee5fcfebb262e9a9065ef47bdc52b47b9"
@@ -6302,6 +6327,10 @@ stream-buffers@~0.2.3:
 stream-buffers@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
+
+strict-uri-encode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
 
 string-length@^2.0.0:
   version "2.0.0"
