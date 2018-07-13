@@ -44,20 +44,25 @@ class Login extends React.Component<LoginScreenProps, LoginScreenState> {
 
   gotoHome = async(index) => {
     const { accounts, phoneNumber } = this.state
-    const reqBody = qs.stringify({
-      AUTH_KEY: this.AUTH_KEY,
+    // const reqBody = qs.stringify({
+    //   AUTH_KEY: this.AUTH_KEY,
+    //   user_name: accounts[index].user_handle,
+    //   password: phoneNumber,
+    // })
+    // const response = await this.api.post('user_login', reqBody)
+    // if (!response.data) {
+    //   return false
+    // }
+    // if (response.data.status === 'success') {
+    //   this.props.navigation.navigate('main')
+    // } else {
+    //   console.log('login request failed!', response.data.message)
+    // }
+    const payload = {
       user_name: accounts[index].user_handle,
       password: phoneNumber,
-    })
-    const response = await this.api.post('user_login', reqBody)
-    if (!response.data) {
-      return false
     }
-    if (response.data.status === 'success') {
-      this.props.navigation.navigate('main')
-    } else {
-      console.log('login request failed!', response.data.message)
-    }
+    this.props.loginRequest(payload)
   }
 
   getProfiles = async() => {
@@ -111,7 +116,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  loginRequest: () => dispatch(AppActions.loginRequest()),
+  loginRequest: (payload: any) => dispatch(AppActions.loginRequest(payload)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { create } from 'apisauce'
 import * as qs from 'query-string'
 import { parseNumber, formatNumber } from 'libphonenumber-js'
-import AppActions from '../../../actions/app'
+import AuthActions from '../../../actions/auth'
 import { BackButton } from '../../../components/shared'
 import * as screenStyles from './pin.styles'
 import { colors } from '../../../themes'
@@ -13,6 +13,8 @@ import { colors } from '../../../themes'
 export interface PINScreenProps extends NavigationScreenProps<{}> {
   status: boolean
   loginRequest?: () => void
+  gettokenRequest?: (payload: any) => void
+  checktokenRequest?: (payload: any) => void
 }
 
 export interface PINScreenState {
@@ -116,30 +118,44 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
     }
   }
 
-  checkVerificationCode = async() => {
+  checkVerificationCode = async () => {
     const { phoneNumber, verificationCode, routed } = this.state
 
-    const reqBody = qs.stringify({
+    const payload = {
       phone: phoneNumber,
       verification: verificationCode.join(''),
-      AUTH_KEY: this.AUTH_KEY,
-    })
-    const response = await this.api.post('check_verification_token', reqBody)
-    console.log('*********', response)
-    if (response.data.status === 'success') {
-      routed === 'login' ? this.toLogin(phoneNumber) : this.toSignup(phoneNumber)
     }
+    this.props.checktokenRequest(payload)
+
+    // const { phoneNumber, verificationCode, routed } = this.state
+
+    // const reqBody = qs.stringify({
+    //   phone: phoneNumber,
+    //   verification: verificationCode.join(''),
+    //   AUTH_KEY: this.AUTH_KEY,
+    // })
+    // const response = await this.api.post('check_verification_token', reqBody)
+    // console.log('*********', response)
+    // if (response.data.status === 'success') {
+    //   routed === 'login' ? this.toLogin(phoneNumber) : this.toSignup(phoneNumber)
+    // }
   }
 
   submitNumber = async () => {
     this.setState({ phoneNumberSubmitted: true })
     const { phoneNumber } = this.state
-
-    const reqBody = qs.stringify({
+    const payload = {
       phone: phoneNumber,
-      AUTH_KEY: this.AUTH_KEY,
-    })
-    const response = await this.api.post('get_challenge_token', reqBody)
+    }
+    this.props.gettokenRequest(payload)
+  //   this.setState({ phoneNumberSubmitted: true })
+  //   const { phoneNumber } = this.state
+
+  //   const reqBody = qs.stringify({
+  //     phone: phoneNumber,
+  //     AUTH_KEY: this.AUTH_KEY,
+  //   })
+  //   const response = await this.api.post('get_challenge_token', reqBody)
   }
 
   formatNumber = () => {
@@ -304,7 +320,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  loginRequest: () => dispatch(AppActions.loginRequest()),
+  loginRequest: () => dispatch(AuthActions.loginRequest()),
+  gettokenRequest: (payload: any) => dispatch(AuthActions.gettokenRequest(payload)),
+  checktokenRequest: (payload: any) => dispatch(AuthActions.checktokenRequest(payload)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PIN)
