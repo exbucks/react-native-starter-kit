@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, Image } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import AppActions from '../../../actions/app'
@@ -21,14 +21,37 @@ class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
   }
 
   toLogin = () => {
-    this.props.navigation.navigate('login')
+    this.props.navigation.navigate('pin', { from: 'login'})
+  }
+
+  toSignup = () => {
+    this.props.navigation.navigate('pin', { from: 'signup'})
   }
 
   render() {
     return (
       <View style={screenStyles.ROOT}>
-        <TouchableOpacity onPress={this.toLogin}>
-          <Text>WELCOME</Text>
+        <Image
+          resizeMode="cover"
+          style={screenStyles.backgroundImage}
+          source={require('../../../assets/img/girl.jpg')}
+        />
+        <Text
+          style={screenStyles.logoText}
+        >
+          {'reel'}
+        </Text>
+        <TouchableOpacity
+          style={[screenStyles.loginButton, { backgroundColor: 'white' }]}
+          onPress={this.toSignup}
+        >
+          <Text style={screenStyles.registerText}>Create an Account</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[screenStyles.loginButton, { marginTop: 10 }]}
+          onPress={this.toLogin}
+        >
+          <Text style={screenStyles.loginText}>Log In</Text>
         </TouchableOpacity>
       </View>
     )

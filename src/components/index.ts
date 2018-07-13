@@ -1,3 +1,3 @@
-import { DrawerScreen, Text, KeyboardSpacer, Header, ProgressBar, Icon } from './shared'
+import { DrawerScreen, Text, KeyboardSpacer, Header, ProgressBar, Icon, BackButton, SVG } from './shared'
 
-export { DrawerScreen, Text, KeyboardSpacer, Header, ProgressBar, Icon }
+export { DrawerScreen, Text, KeyboardSpacer, Header, ProgressBar, Icon, BackButton, SVG }
