@@ -1,78 +1,44 @@
 import * as React from 'react'
-import { Text, TouchableOpacity, View, Image, Button, TextInput } from 'react-native'
+import { Alert, Text, TouchableOpacity, View, Image, Button, TextInput } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
-import { create } from 'apisauce'
-import * as qs from 'query-string'
 import { parseNumber, formatNumber } from 'libphonenumber-js'
+import { equals } from 'ramda'
 import AuthActions from '../../../actions/auth'
 import { BackButton } from '../../../components/shared'
-import * as screenStyles from './pin.styles'
 import { colors } from '../../../themes'
+import * as screenStyles from './pin.styles'
 
 export interface PINScreenProps extends NavigationScreenProps<{}> {
   status: boolean
-  loginRequest?: () => void
   gettokenRequest?: (payload: any) => void
   checktokenRequest?: (payload: any) => void
 }
 
 export interface PINScreenState {
-  isBusy: boolean,
   routed: string,
   countryCode: string,
   phoneNumber: string,
   validNumber: boolean,
-  sendingText: boolean,
   phoneNumberSubmitted: boolean,
   verificationCode: Array<string>,
-  error: boolean,
 }
 
 class PIN extends React.Component<PINScreenProps, PINScreenState> {
   codeInput: Array<any>
-  api: any
-  AUTH_KEY: string = 'ffaf4b736f342c3c3aace3d86fb72341'
-  BASE_URL: string = 'https://www.net-networking.com/mobile_api'
 
   constructor(props) {
     super(props)
     const routedFrom = props.navigation.getParam('from', 'login')
-    this.state = { 
-      isBusy: false,
+    this.state = {
       routed: routedFrom,
       countryCode: '+1',
       phoneNumber: '',
       validNumber: false,
-      sendingText: false,
       phoneNumberSubmitted: false,
       verificationCode: ['', '', '', '', '', ''],
-      error: false,
     }
     this.codeInput = []
-    this.api = create({
-      baseURL: this.BASE_URL,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json',
-      },
-    })
-  }
-
-  goBack = () => {
-    this.props.navigation.goBack()
-  }
-
-  toLogin = phoneNumber => {
-    this.props.navigation.navigate('login', {
-      phoneNumber: phoneNumber,
-    })
-  }
-
-  toSignup = phoneNumber => {
-    this.props.navigation.navigate('signup', {
-      phoneNumber: phoneNumber,
-    })
   }
 
   onSwitch = () => {
@@ -103,9 +69,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
   }
 
   onChangeVerificationCode = (index, text) => {
-    if (!text) {
-      return
-    }
+    if (!text) return
 
     const { verificationCode } = this.state
     verificationCode[index] = text
@@ -118,7 +82,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
     }
   }
 
-  checkVerificationCode = async () => {
+  checkVerificationCode = () => {
     const { phoneNumber, verificationCode, routed } = this.state
 
     const payload = {
@@ -126,36 +90,12 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
       verification: verificationCode.join(''),
     }
     this.props.checktokenRequest(payload)
-
-    // const { phoneNumber, verificationCode, routed } = this.state
-
-    // const reqBody = qs.stringify({
-    //   phone: phoneNumber,
-    //   verification: verificationCode.join(''),
-    //   AUTH_KEY: this.AUTH_KEY,
-    // })
-    // const response = await this.api.post('check_verification_token', reqBody)
-    // console.log('*********', response)
-    // if (response.data.status === 'success') {
-    //   routed === 'login' ? this.toLogin(phoneNumber) : this.toSignup(phoneNumber)
-    // }
   }
 
-  submitNumber = async () => {
+  submitNumber = () => {
     this.setState({ phoneNumberSubmitted: true })
-    const { phoneNumber } = this.state
-    const payload = {
-      phone: phoneNumber,
-    }
+    const payload = { phone: this.state.phoneNumber }
     this.props.gettokenRequest(payload)
-  //   this.setState({ phoneNumberSubmitted: true })
-  //   const { phoneNumber } = this.state
-
-  //   const reqBody = qs.stringify({
-  //     phone: phoneNumber,
-  //     AUTH_KEY: this.AUTH_KEY,
-  //   })
-  //   const response = await this.api.post('get_challenge_token', reqBody)
   }
 
   formatNumber = () => {
@@ -166,11 +106,14 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
   }
 
   resendCode = () => {
-    alert(`We're sending another code to ${this.formatNumber()}. Please wait up to 3 minutes before requesting another`)
+    Alert.alert(
+      `We're sending another code to ${this.formatNumber()}. Please wait up to 3 minutes before requesting another`
+    )
     this.submitNumber()
   }
 
   render() {
+    const { navigation, status } = this.props
     const { routed, phoneNumberSubmitted, countryCode, phoneNumber, validNumber } = this.state
 
     let bgImage = null
@@ -218,7 +161,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
     return (
       <View style={screenStyles.ROOT}>
         { bgImage }
-        <BackButton onBack={() => this.goBack()}/>
+        <BackButton onBack={() => navigation.goBack()}/>
         <Text
           style={screenStyles.logoText}
         >
@@ -255,7 +198,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
                 )
               })}
             </View>
-            {this.state.error && (
+            {equals(status, 'error') && (
               <Text>
                 That code is invalid. Please try again
               </Text>
@@ -320,7 +263,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  loginRequest: () => dispatch(AuthActions.loginRequest()),
   gettokenRequest: (payload: any) => dispatch(AuthActions.gettokenRequest(payload)),
   checktokenRequest: (payload: any) => dispatch(AuthActions.checktokenRequest(payload)),
 })

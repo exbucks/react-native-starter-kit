@@ -16,6 +16,7 @@ const persistConfig = {
 const reducers = combineReducers({
   nav: require('./navigation').reducer,
   app: require('./app').reducer,
+  auth: require('./auth').reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers)

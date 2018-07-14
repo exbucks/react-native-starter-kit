@@ -5,7 +5,6 @@ import * as qs from 'query-string'
 const authenticated = payload => {
   if (isNil(payload)) payload = {}
   payload.AUTH_KEY = 'ffaf4b736f342c3c3aace3d86fb72341'
-  console.log('~~~~~~~@@@@@@@@@@@:   ', qs.stringify(payload))
   return qs.stringify(payload)
 }
 
@@ -14,7 +13,7 @@ const create = (baseURL = 'https://www.net-networking.com/mobile_api/') => {
     baseURL,
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
     // 10 second timeout...
     timeout: 10000,
