@@ -16,12 +16,12 @@ export interface PINScreenProps extends NavigationScreenProps<{}> {
 }
 
 export interface PINScreenState {
-  routed: string,
-  countryCode: string,
-  phoneNumber: string,
-  validNumber: boolean,
-  phoneNumberSubmitted: boolean,
-  verificationCode: Array<string>,
+  routed: string
+  countryCode: string
+  phoneNumber: string
+  validNumber: boolean
+  phoneNumberSubmitted: boolean
+  verificationCode: Array<string>
 }
 
 class PIN extends React.Component<PINScreenProps, PINScreenState> {
@@ -51,7 +51,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
         this.setState({ routed: 'signup' })
       } else {
         this.setState({ routed: 'login' })
-      }  
+      }
     }
   }
 
@@ -60,7 +60,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
     if (countryCode.indexOf('+') === -1) {
       countryCode = '+' + countryCode
     }
-    this.setState ({ countryCode })
+    this.setState({ countryCode })
   }
 
   onChangePhoneNumber = phoneNumber => {
@@ -76,7 +76,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
     this.setState({ verificationCode })
 
     if (index < 5) {
-      this.codeInput[index+1].focus()
+      this.codeInput[index + 1].focus()
     } else {
       this.checkVerificationCode()
     }
@@ -107,7 +107,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
 
   resendCode = () => {
     Alert.alert(
-      `We're sending another code to ${this.formatNumber()}. Please wait up to 3 minutes before requesting another`
+      `We're sending another code to ${this.formatNumber()}. Please wait up to 3 minutes before requesting another`,
     )
     this.submitNumber()
   }
@@ -134,25 +134,25 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
       sendButtonStyle = {
         borderWidth: 1,
         borderColor: colors.white,
-      }  
+      }
     }
 
-    let introText = ""
-    let bottomText = ""
-    let bottomBtnText = ""
+    let introText = ''
+    let bottomText = ''
+    let bottomBtnText = ''
     if (phoneNumberSubmitted) {
-      introText = "Please enter the six-digit verification code sent to the number provided"
-      bottomText = "Wrong number?"
-      bottomBtnText = "Go back!"
+      introText = 'Please enter the six-digit verification code sent to the number provided'
+      bottomText = 'Wrong number?'
+      bottomBtnText = 'Go back!'
     } else {
       if (routed === 'login') {
-        introText = "Enter the phone number associated with your account!"
+        introText = 'Enter the phone number associated with your account!'
         bottomText = "Don't you have an account?"
-        bottomBtnText = "Create one!"
+        bottomBtnText = 'Create one!'
       } else {
         introText = "Let's get you verified!"
-        bottomText = "Already have an account?"
-        bottomBtnText = "Log In!"  
+        bottomText = 'Already have an account?'
+        bottomBtnText = 'Log In!'
       }
     }
 
@@ -160,23 +160,17 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
 
     return (
       <View style={screenStyles.ROOT}>
-        { bgImage }
-        <BackButton onBack={() => navigation.goBack()}/>
-        <Text
-          style={screenStyles.logoText}
-        >
-          {'reel'}
-        </Text>
-        <Text style={screenStyles.introText}>
-          { introText }
-        </Text>
-        { phoneNumberSubmitted ? (
+        {bgImage}
+        <BackButton onBack={() => navigation.goBack()} />
+        <Text style={screenStyles.logoText}>{'reel'}</Text>
+        <Text style={screenStyles.introText}>{introText}</Text>
+        {phoneNumberSubmitted ? (
           <View>
             <View style={screenStyles.codeArea}>
-              {listArrary.map((key) => {
+              {listArrary.map(key => {
                 return (
                   <TextInput
-                    onFocus = {() => {
+                    onFocus={() => {
                       const { verificationCode } = this.state
                       verificationCode[key] = ''
                       this.setState({ verificationCode })
@@ -187,9 +181,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
                     maxLength={1}
                     key={`code-input-${key}`}
                     value={this.state.verificationCode[key]}
-                    onChangeText={text =>
-                      this.onChangeVerificationCode(key, text)
-                    }
+                    onChangeText={text => this.onChangeVerificationCode(key, text)}
                     underlineColorAndroid="rgba(0,0,0,0)"
                     keyboardType="phone-pad"
                     style={screenStyles.codeTextInput}
@@ -198,11 +190,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
                 )
               })}
             </View>
-            {equals(status, 'error') && (
-              <Text>
-                That code is invalid. Please try again
-              </Text>
-            )}
+            {equals(status, 'error') && <Text>That code is invalid. Please try again</Text>}
             <TouchableOpacity
               onPress={() => this.resendCode()}
               style={[screenStyles.sendButton, { marginTop: 0 }]}
@@ -212,7 +200,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
               </Text>
             </TouchableOpacity>
           </View>
-        ): (
+        ) : (
           <View style={screenStyles.middleArea}>
             <View style={screenStyles.codeArea}>
               <TextInput
@@ -241,9 +229,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
               style={[screenStyles.sendButton, sendButtonStyle]}
               disabled={!validNumber}
             >
-              <Text style={screenStyles.buttonText}>
-                Send Verification
-              </Text>
+              <Text style={screenStyles.buttonText}>Send Verification</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -267,4 +253,7 @@ const mapDispatchToProps = dispatch => ({
   checktokenRequest: (payload: any) => dispatch(AuthActions.checktokenRequest(payload)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PIN)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PIN)
