@@ -11,6 +11,7 @@ import * as screenStyles from './pin.styles'
 
 export interface PINScreenProps extends NavigationScreenProps<{}> {
   status: boolean
+  pin: string
   gettokenRequest?: (payload: any) => void
   checktokenRequest?: (payload: any) => void
 }
@@ -246,6 +247,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
 
 const mapStateToProps = state => ({
   status: state.app.status,
+  pin: state.auth.pin,
 })
 
 const mapDispatchToProps = dispatch => ({
