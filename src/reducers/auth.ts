@@ -13,7 +13,7 @@ const gettokenSuccess = (state, action) => state.merge({ ...state, pin: action.r
 const gettokenFailure = (state, action) => state.merge({ ...state, status: 'error' })
 
 const checktokenRequest = (state, action) => state.merge({ ...state, status: 'pending' })
-const checktokenSuccess = (state, action) => state.merge({ ...state, status: 'done' })
+const checktokenSuccess = (state, action) => state.merge({ ...state, status: 'success' })
 const checktokenFailure = (state, action) => state.merge({ ...state, status: 'error' })
 
 export const reducer = createReducer(initialState, {

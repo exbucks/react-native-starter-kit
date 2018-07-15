@@ -10,8 +10,8 @@ import { AuthTypes } from '../actions/auth'
 /**
  * Sagas
  */
-// import { loginRequest } from './app'
-import { loginRequest, gettokenRequest, checktokenRequest } from './auth'
+import { loginRequest } from './app'
+import { gettokenRequest, checktokenRequest } from './auth'
 
 /**
  * API
@@ -26,7 +26,7 @@ const api = API.create()
 export default function* root() {
   yield all([
     // some sagas receive extra parameters in addition to an action
-    takeLatest(AuthTypes.LOGIN_REQUEST, loginRequest, api),
+    takeLatest(AppTypes.LOGIN_REQUEST, loginRequest, api),
     takeLatest(AuthTypes.GETTOKEN_REQUEST, gettokenRequest, api),
     takeLatest(AuthTypes.CHECKTOKEN_REQUEST, checktokenRequest, api),
   ])

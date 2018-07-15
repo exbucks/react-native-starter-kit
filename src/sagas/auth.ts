@@ -1,5 +1,4 @@
-import { call, put } from 'redux-saga/effects'
-import { NavigationActions } from 'react-navigation'
+import { put } from 'redux-saga/effects'
 import { equals } from 'ramda'
 import AuthActions from '../actions/auth'
 
@@ -7,7 +6,6 @@ import AuthActions from '../actions/auth'
 export function* gettokenRequest(api, action) {
   const { payload } = action
   const response = yield api.getChallengeToken(payload)
-
   if (equals(response.data.status, 'success')) {
     yield put(AuthActions.gettokenSuccess(response.data.message))
   } else {
@@ -18,10 +16,9 @@ export function* gettokenRequest(api, action) {
 export function* checktokenRequest(api, action) {
   const { payload } = action
   const response = yield api.checkVerificationToken(payload)
-
   if (equals(response.data.status, 'success')) {
-    yield put(NavigationActions.navigate({ routeName: 'login' }))
+    yield put(AuthActions.checktokenSuccess())
   } else {
-    yield put(NavigationActions.navigate({ routeName: 'signup' }))
+    yield put(AuthActions.checktokenFailure())
   }
 }
