@@ -41,6 +41,7 @@ export const introText: TextStyle = {
   textAlign: 'center',
   fontSize: 15,
   width: '85%',
+  minHeight: 40,
 }
 
 export const middleArea: ViewStyle = {
@@ -74,6 +75,8 @@ export const sendButton: ViewStyle = {
   borderRadius: 20,
   height: 40,
   margin: 5,
+  borderWidth: 1,
+  borderColor: colors.transparent,
 }
 
 export const buttonText: TextStyle = {
@@ -96,4 +99,11 @@ export const bottomText: TextStyle = {
   color: colors.white,
   fontSize: 14,
   marginRight: 10,
+}
+
+export const errroText: TextStyle = {
+  color: colors.red,
+  fontSize: 14,
+  textAlign: 'center',
+  fontFamily: 'Varela Round',
 }
