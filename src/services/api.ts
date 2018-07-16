@@ -21,12 +21,15 @@ const create = (baseURL = 'https://www.net-networking.com/mobile_api/') => {
 
   const loginByEmail = payload => api.post('user_login', authenticated(payload))
   const getChallengeToken = payload => api.post('get_challenge_token', authenticated(payload))
-  const checkVerificationToken = payload => api.post('check_verification_token', authenticated(payload))
+  const checkVerificationToken = payload =>
+    api.post('check_verification_token', authenticated(payload))
+  const getProfiles = payload => api.post('show_users_with_phone', authenticated(payload))
 
   return {
     loginByEmail,
     getChallengeToken,
     checkVerificationToken,
+    getProfiles,
   }
 }
 
