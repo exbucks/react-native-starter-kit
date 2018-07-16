@@ -10,8 +10,8 @@ import { AuthTypes } from '../actions/auth'
 /**
  * Sagas
  */
-import { loginRequest, getProfiles } from './app'
-import { gettokenRequest, checktokenRequest } from './auth'
+import { loginRequest, getProfiles, usernameAvailable } from './app'
+import { gettokenRequest, signupRequest } from './auth'
 
 /**
  * API
@@ -28,7 +28,8 @@ export default function* root() {
     // some sagas receive extra parameters in addition to an action
     takeLatest(AppTypes.LOGIN_REQUEST, loginRequest, api),
     takeLatest(AuthTypes.GETTOKEN_REQUEST, gettokenRequest, api),
-    takeLatest(AuthTypes.CHECKTOKEN_REQUEST, checktokenRequest, api),
+    takeLatest(AuthTypes.SIGNUP_REQUEST, signupRequest, api),
     takeLatest(AppTypes.GETPROFILE_REQUEST, getProfiles, api),
+    takeLatest(AppTypes.USERNAME_REQUEST, usernameAvailable, api),
   ])
 }

@@ -6,9 +6,9 @@ const { Types, Creators } = createActions({
   gettokenSuccess: ['response'],
   gettokenFailure: null,
 
-  checktokenRequest: ['payload'],
-  checktokenSuccess: null,
-  checktokenFailure: null,
+  signupRequest: ['payload'],
+  signupSuccess: null,
+  signupFailure: ['response'],
 })
 
 export const AuthTypes = Types
