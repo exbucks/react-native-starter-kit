@@ -5,10 +5,19 @@ import AppActions from '../actions/app'
 export function* loginRequest(api, action) {
   const { payload } = action
   const response = yield api.loginByEmail(payload)
-  console.log('$$$$$$$$$$:   ', response)
-  // if (response.ok) {
-  //   yield put(AppActions.loginSuccess())
-  // } else {
-  //   yield put(AppActions.loginFailure())
-  // }
+  if (response.ok) {
+    yield put(NavigationActions.navigate({ routeName: 'main' }))
+  } else {
+    yield put(AppActions.loginFailure())
+  }
+}
+
+export function* getProfiles(api, action) {
+  const { payload } = action
+  const response = yield api.getProfiles(payload)
+  if (response.ok) {
+    yield put(AppActions.getprofileSuccess(response.data))
+  } else {
+    yield put(AppActions.getprofileFailure())
+  }
 }
