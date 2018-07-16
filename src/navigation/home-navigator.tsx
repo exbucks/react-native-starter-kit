@@ -16,7 +16,7 @@ const HomeNavigator = StackNavigator(
   },
   {
     initialRouteName: 'home_main',
-    navigationOptions: {}
+    navigationOptions: {},
   },
 )
 
