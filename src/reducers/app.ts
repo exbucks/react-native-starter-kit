@@ -7,14 +7,18 @@ const initialState = Immutable({
   profileData: [],
 })
 
-const loginRequest = (state, action) => state.merge({ ...state, _status: 'pending' })
-const loginSuccess = (state, action) => state.merge({ ...state, _status: 'done' })
-const loginFailure = (state, action) => state.merge({ ...state, _status: 'error' })
+const loginRequest = (state, action) => state.merge({ ...state, status: 'pending' })
+const loginSuccess = (state, action) => state.merge({ ...state, status: 'done' })
+const loginFailure = (state, action) => state.merge({ ...state, status: 'error' })
 
-const getprofileRequest = (state, action) => state.merge({ ...state, _status: 'pending' })
+const getprofileRequest = (state, action) => state.merge({ ...state, status: 'pending' })
 const getprofileSuccess = (state, action) =>
-  state.merge({ ...state, profileData: action.response, _status: 'done' })
-const getprofileFailure = (state, action) => state.merge({ ...state, _status: 'error' })
+  state.merge({ ...state, profileData: action.response, status: 'done' })
+const getprofileFailure = (state, action) => state.merge({ ...state, status: 'error' })
+
+const usernameRequest = (state, action) => state.merge({ ...state, status: 'checking' })
+const usernameSuccess = (state, action) => state.merge({ ...state, status: 'available' })
+const usernameFailure = (state, action) => state.merge({ ...state, status: 'unavailable' })
 
 export const reducer = createReducer(initialState, {
   [AppTypes.LOGIN_REQUEST]: loginRequest,
@@ -24,4 +28,8 @@ export const reducer = createReducer(initialState, {
   [AppTypes.GETPROFILE_REQUEST]: getprofileRequest,
   [AppTypes.GETPROFILE_SUCCESS]: getprofileSuccess,
   [AppTypes.GETPROFILE_FAILURE]: getprofileFailure,
+
+  [AppTypes.USERNAME_REQUEST]: usernameRequest,
+  [AppTypes.USERNAME_SUCCESS]: usernameSuccess,
+  [AppTypes.USERNAME_FAILURE]: usernameFailure,
 })

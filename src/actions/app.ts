@@ -10,6 +10,11 @@ const { Types, Creators } = createActions({
   getprofileRequest: ['payload'],
   getprofileSuccess: ['response'],
   getprofileFailure: null,
+
+  // Username availability
+  usernameRequest: ['payload'],
+  usernameSuccess: null,
+  usernameFailure: null,
 })
 
 export const AppTypes = Types
