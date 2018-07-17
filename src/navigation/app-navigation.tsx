@@ -70,7 +70,6 @@ const TransitionConfiguration = () => {
   }
 }
 
-
 const Main = TabNavigator(
   {
     Explorer: {
@@ -87,7 +86,7 @@ const Main = TabNavigator(
     },
   },
   {
-    initialRouteName: 'Camera',
+    initialRouteName: 'Home',
     animationEnabled: false,
     backBehavior: 'none',
     lazy: true,
