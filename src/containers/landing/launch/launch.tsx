@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, TouchableOpacity, View, Image } from 'react-native'
+import { Text, TouchableOpacity, View, Image, StatusBar } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import AppActions from '../../../actions/app'
@@ -18,14 +18,15 @@ class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
   constructor(props) {
     super(props)
     this.state = { isBusy: false }
+    StatusBar.setBarStyle('light-content', true)
   }
 
   toLogin = () => {
-    this.props.navigation.navigate('pin', { from: 'login'})
+    this.props.navigation.navigate('pin', { from: 'login' })
   }
 
   toSignup = () => {
-    this.props.navigation.navigate('pin', { from: 'signup'})
+    this.props.navigation.navigate('pin', { from: 'signup' })
   }
 
   render() {
@@ -36,11 +37,7 @@ class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
           style={screenStyles.backgroundImage}
           source={require('../../../assets/img/girl.jpg')}
         />
-        <Text
-          style={screenStyles.logoText}
-        >
-          {'reel'}
-        </Text>
+        <Text style={screenStyles.logoText}>{'reel'}</Text>
         <TouchableOpacity
           style={[screenStyles.loginButton, { backgroundColor: 'white' }]}
           onPress={this.toSignup}
@@ -66,4 +63,7 @@ const mapDispatchToProps = dispatch => ({
   loginRequest: () => dispatch(AppActions.loginRequest()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Launch)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Launch)
