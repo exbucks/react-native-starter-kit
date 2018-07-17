@@ -2,11 +2,15 @@ import { call, put } from 'redux-saga/effects'
 import { NavigationActions } from 'react-navigation'
 import { equals } from 'ramda'
 import AppActions from '../actions/app'
-523163
+
 export function* loginRequest(api, action) {
   const { payload } = action
   const response = yield api.loginByEmail(payload)
-  if (response.ok) {
+  console.log('&&&&&', response)
+  const auth_token = response.data.auth_token //need to save to the localstorage
+  const user_id = response.data.user_id //need to save to the localstorage
+  const user_feed = response.data.userfeed //need to save to the localstorage
+  if (equals(response.data.status, 'success')) {
     yield put(NavigationActions.navigate({ routeName: 'main' }))
   } else {
     yield put(AppActions.loginFailure())
