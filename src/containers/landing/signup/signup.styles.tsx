@@ -17,6 +17,7 @@ export const contentContainer: ViewStyle = {
 
 export const logoText: TextStyle = {
   width: '100%',
+  height: 150,
   textAlign: 'center',
   fontFamily: 'Pacifico',
   fontSize: 90,

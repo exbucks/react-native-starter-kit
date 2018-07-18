@@ -169,7 +169,6 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
             <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>{` Log in! `}</Text>
           </TouchableOpacity>
         </View>
-        <KeyboardSpacer />
       </View>
     )
   }
