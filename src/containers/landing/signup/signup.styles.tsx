@@ -16,6 +16,8 @@ export const contentContainer: ViewStyle = {
 }
 
 export const logoText: TextStyle = {
+  width: '100%',
+  textAlign: 'center',
   fontFamily: 'Pacifico',
   fontSize: 90,
   color: colors.white,
@@ -41,14 +43,14 @@ export const availabilityText: TextStyle = {
 
 export const nameTextInput: TextStyle = {
   color: colors.black,
-  fontSize: 16,
+  fontSize: 14,
   backgroundColor: colors.white,
   borderRadius: 20,
   borderWidth: 1,
-  height: 40,
+  height: 35,
   width: '100%',
-  padding: 7,
-  paddingLeft: 10,
+  padding: 5,
+  paddingLeft: 15,
   margin: 5,
 }
 
@@ -62,7 +64,7 @@ export const errorText: TextStyle = {
 
 export const createButton: ViewStyle = {
   width: '100%',
-  height: 40,
+  height: 35,
   marginTop: 8,
   borderRadius: 20,
   borderColor: colors.white,
@@ -89,6 +91,7 @@ export const linkArea: ViewStyle = {
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'center',
+  marginBottom: 100,
 }
 
 export const linkText: TextStyle = {
@@ -102,4 +105,21 @@ export const linkBetweenText: TextStyle = {
   textShadowRadius: 2,
   textShadowOffset: { width: 1, height: 1 },
   paddingHorizontal: 5,
+}
+
+export const LoginArea: ViewStyle = {
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  bottom: 20,
+  height: 60,
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
+
+export const bottomText: TextStyle = {
+  color: colors.white,
+  fontSize: 14,
+  marginRight: 10,
 }

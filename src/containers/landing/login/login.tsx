@@ -2,8 +2,6 @@ import * as React from 'react'
 import { Text, TouchableOpacity, View, ScrollView, Image, TextBase } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
-import { create } from 'apisauce'
-import * as qs from 'query-string'
 import AppActions from '../../../actions/app'
 import * as screenStyles from './login.styles'
 
@@ -20,6 +18,7 @@ export interface LoginScreenState {
 }
 
 class Login extends React.Component<LoginScreenProps, LoginScreenState> {
+  userImgURL = `https://d1e9n6uw5itnwz.cloudfront.net/user`
   constructor(props) {
     super(props)
     const phoneNumber = props.navigation.getParam('phone', '')
@@ -60,9 +59,7 @@ class Login extends React.Component<LoginScreenProps, LoginScreenState> {
             contentContainerStyle={screenStyles.scrollContentContainer}
           >
             {profileData.map((account, index) => {
-              const profileImage = `https://d1e9n6uw5itnwz.cloudfront.net/user/${
-                account.user_id
-              }_photo.jpg`
+              const profileImage = `${this.userImgURL}/${account.user_id}_photo.jpg`
               return (
                 <TouchableOpacity
                   style={screenStyles.profileButton}
@@ -76,6 +73,7 @@ class Login extends React.Component<LoginScreenProps, LoginScreenState> {
                 </TouchableOpacity>
               )
             })}
+            <View style={{ height: 23 }} />
           </ScrollView>
         </View>
       </View>

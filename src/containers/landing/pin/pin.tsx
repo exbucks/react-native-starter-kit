@@ -3,7 +3,6 @@ import { Alert, Text, TouchableOpacity, View, Image, Button, TextInput } from 'r
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import { parseNumber, formatNumber } from 'libphonenumber-js'
-import { equals } from 'ramda'
 import AuthActions from '../../../actions/auth'
 import { BackButton } from '../../../components/shared'
 import { colors } from '../../../themes'
