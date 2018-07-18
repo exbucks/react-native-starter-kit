@@ -18,7 +18,7 @@ class Add extends React.Component<HomeScreenProps, HomeScreenState> {
   constructor(props) {
     super(props)
     this.state = { isBusy: false }
-    StatusBar.setBarStyle('dark-content', true)
+    StatusBar.setBarStyle('default')
   }
 
   toLogin = () => {

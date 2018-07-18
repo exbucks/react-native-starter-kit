@@ -1,5 +1,6 @@
 import { ViewStyle, TextStyle, ImageStyle, Dimensions } from 'react-native'
 import { colors } from '../../../themes'
+import { isAndroid } from '../../../services'
 const window = Dimensions.get('window')
 
 export const ROOT: ViewStyle = {
@@ -7,15 +8,12 @@ export const ROOT: ViewStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: colors.purple,
-  paddingTop: 20,
 }
 
 export const logoText: TextStyle = {
-  backgroundColor: 'transparent',
-  position: 'absolute',
-  top: window.height / 2 - 230,
-  left: window.width / 2,
-  marginLeft: -80,
+  width: '100%',
+  height: 150,
+  textAlign: 'center',
   fontFamily: 'Pacifico',
   fontSize: 90,
   color: colors.white,
@@ -32,17 +30,16 @@ export const introText: TextStyle = {
 }
 
 export const scrollContainer: ViewStyle = {
-  height: 200,
+  height: 230,
   flexDirection: 'column',
   alignItems: 'center',
+  marginBottom: 100,
 }
 
 export const scrollViewStyle: ViewStyle = {
-  height: 150,
   width: window.width,
-  paddingVertical: 10,
-  paddingHorizontal: 5,
-  overflow: 'hidden',
+  padding: 15,
+  overflow: 'scroll',
 }
 
 export const scrollContentContainer: ViewStyle = {
@@ -54,9 +51,8 @@ export const profileButton: ViewStyle = {
   borderRadius: 18,
   backgroundColor: colors.white,
   width: '65%',
-  height: 36,
-  marginLeft: 3,
-  marginBottom: 10,
+  height: 35,
+  marginBottom: 5,
 }
 
 export const profileContainer: ViewStyle = {

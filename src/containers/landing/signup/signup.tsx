@@ -92,7 +92,7 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
   }
 
   render() {
-    const { username, firstName, lastName } = this.state
+    const { username, firstName, lastName, phoneNumber } = this.state
     const { status, message } = this.props
     return (
       <View style={screenStyles.ROOT}>
@@ -160,6 +160,14 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
               <Text style={screenStyles.linkText}>Privacy Policy</Text>
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={screenStyles.LoginArea}>
+          <Text style={screenStyles.bottomText}>{`Already have an account?`}</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('login', { phone: phoneNumber })}
+          >
+            <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>{` Log in! `}</Text>
+          </TouchableOpacity>
         </View>
         <KeyboardSpacer />
       </View>
