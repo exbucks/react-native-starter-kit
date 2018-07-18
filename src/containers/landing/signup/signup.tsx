@@ -144,13 +144,15 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
           <TouchableOpacity
             style={screenStyles.createButton}
             onPress={this.showTermsAlert}
-            disabled={status === 'unavailable' || firstName === '' || lastName === ''}
+            disabled={
+              status === 'unavailable' || username === '' || firstName === '' || lastName === ''
+            }
           >
-            <Text style={screenStyles.buttonText}>Create Account</Text>
+            <Text style={screenStyles.buttonText}>{`Create Account`}</Text>
           </TouchableOpacity>
         </View>
         <View style={screenStyles.bottomArea}>
-          <Text style={screenStyles.introText}>By creating an account, you agree to our</Text>
+          <Text style={screenStyles.introText}>{`By creating an account, you agree to our`}</Text>
           <View style={screenStyles.linkArea}>
             <TouchableOpacity onPress={this.gotoTerms}>
               <Text style={screenStyles.linkText}>Terms of Service</Text>
@@ -166,7 +168,7 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('login', { phone: phoneNumber })}
           >
-            <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>{` Log in! `}</Text>
+            <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>{`Log in!`}</Text>
           </TouchableOpacity>
         </View>
       </View>
