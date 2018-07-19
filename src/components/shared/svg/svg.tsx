@@ -11,7 +11,7 @@ import Svg, {
   Stop,
 } from 'react-native-svg'
 
-export class SVG {
+export default class SVG {
   static BackForward(height = 28, fill = '#fff') {
     const aspectRatio = 28 / 28
     return (
@@ -84,7 +84,10 @@ export class SVG {
     return (
       <Svg width={height * aspectRatio} height={height} viewBox="0 0 58 58">
         <G>
-          <Path d="M29 0c-16.016 0-29 12.984-29 29s12.984 29 29 29 29-12.984 29-29-12.984-29-29-29zM29 52.563c-13.013 0-23.563-10.549-23.563-23.563s10.549-23.563 23.563-23.563 23.563 10.549 23.563 23.563-10.549 23.563-23.563 23.563zM21.75 16.313l21.75 12.688-21.75 12.688z" fill={fill}/>
+          <Path
+            d="M29 0c-16.016 0-29 12.984-29 29s12.984 29 29 29 29-12.984 29-29-12.984-29-29-29zM29 52.563c-13.013 0-23.563-10.549-23.563-23.563s10.549-23.563 23.563-23.563 23.563 10.549 23.563 23.563-10.549 23.563-23.563 23.563zM21.75 16.313l21.75 12.688-21.75 12.688z"
+            fill={fill}
+          />
         </G>
       </Svg>
     )
@@ -109,14 +112,14 @@ export class SVG {
         <G>
           <G>
             <Path
-              fill={fill} 
+              fill={fill}
               d="M49.42,56.86a1.38,1.38,0,1,1,0-2.76,4.7,4.7,0,0,0,4.69-4.69V8.58a4.7,4.7,0,0,0-4.69-4.69H8.58A4.7,4.7,0,0,0,3.89,8.58V49.41A4.7,4.7,0,0,0,8.58,54.1a1.38,1.38,0,1,1,0,2.76,7.46,7.46,0,0,1-7.45-7.45V8.58A7.46,7.46,0,0,1,8.58,1.14H49.42a7.46,7.46,0,0,1,7.45,7.45V49.41A7.46,7.46,0,0,1,49.42,56.86Z"
             />
-            <Path 
+            <Path
               fill={fill}
               d="M49.42,58a2.51,2.51,0,1,1,0-5A3.56,3.56,0,0,0,53,49.42V8.58A3.56,3.56,0,0,0,49.42,5H8.59A3.56,3.56,0,0,0,5,8.58V49.42A3.56,3.56,0,0,0,8.59,53a2.51,2.51,0,1,1,0,5A8.6,8.6,0,0,1,0,49.42V8.58A8.6,8.6,0,0,1,8.59,0H49.42A8.59,8.59,0,0,1,58,8.58V49.42A8.59,8.59,0,0,1,49.42,58ZM8.59,2.76H49.42a5.83,5.83,0,0,1,5.82,5.83V49.42a5.83,5.83,0,0,1-5.82,5.83.24.24,0,0,0-.24.24.24.24,0,0,0,.24.24,6.32,6.32,0,0,0,6.31-6.31V8.58a6.32,6.32,0,0,0-6.31-6.31H8.59A6.32,6.32,0,0,0,2.27,8.58V49.42a6.32,6.32,0,0,0,6.31,6.31.24.24,0,1,0,0-.49,5.83,5.83,0,0,1-5.83-5.83V8.58A5.83,5.83,0,0,1,8.59,2.76Z"
             />
-            <Path 
+            <Path
               fill={fill}
               d="M29,48.38A1.38,1.38,0,0,1,27.62,47V16.38a1.38,1.38,0,0,1,2.76,0V47A1.38,1.38,0,0,1,29,48.38Z"
             />
@@ -128,7 +131,7 @@ export class SVG {
               fill={fill}
               d="M29,48.88a1.38,1.38,0,0,1-1-.4L13.61,34.06a1.38,1.38,0,0,1,2-2L29,45.55,42.44,32.11a1.38,1.38,0,0,1,2,2L30,48.48A1.38,1.38,0,0,1,29,48.88Z"
             />
-            <Path 
+            <Path
               fill={fill}
               d="M29,50a2.5,2.5,0,0,1-1.78-.74L12.81,34.86a2.52,2.52,0,0,1,3.56-3.56L29,43.94,41.64,31.31a2.51,2.51,0,1,1,3.56,3.56L30.78,49.28A2.48,2.48,0,0,1,29,50ZM14.59,32.84a.25.25,0,0,0-.17.07.27.27,0,0,0,0,.35L29,47.74a.23.23,0,0,0,.17-.07L43.59,33.26a.24.24,0,1,0-.34-.35L29,47.16,14.76,32.91A.25.25,0,0,0,14.59,32.84Z"
             />
@@ -202,7 +205,10 @@ export class SVG {
     const aspectRatio = 28 / 28
     return (
       <Svg width={height * aspectRatio} height={height} viewBox="0 0 28 28">
-        <Path fill={fill} d="M27,12.15H16.85a1,1,0,0,1-1-1V1a1,1,0,0,0-1-1H13.68a1,1,0,0,0-1,1V11.15a1,1,0,0,1-1,1H1a1,1,0,0,0-1,1v1.17a1,1,0,0,0,1,1H11.68a1,1,0,0,1,1,1V27a1,1,0,0,0,1,1h1.17a1,1,0,0,0,1-1V16.32a1,1,0,0,1,1-1H27a1,1,0,0,0,1-1V13.15A1,1,0,0,0,27,12.15Z"/>
+        <Path
+          fill={fill}
+          d="M27,12.15H16.85a1,1,0,0,1-1-1V1a1,1,0,0,0-1-1H13.68a1,1,0,0,0-1,1V11.15a1,1,0,0,1-1,1H1a1,1,0,0,0-1,1v1.17a1,1,0,0,0,1,1H11.68a1,1,0,0,1,1,1V27a1,1,0,0,0,1,1h1.17a1,1,0,0,0,1-1V16.32a1,1,0,0,1,1-1H27a1,1,0,0,0,1-1V13.15A1,1,0,0,0,27,12.15Z"
+        />
       </Svg>
     )
   }
@@ -305,27 +311,9 @@ export class SVG {
 			c-3.052,0-4.364-1.303-4.364-4.363V230.32h424.431V721.922z M644.715,182.339H129.551v-38.387c0-3.053,1.312-4.802,4.364-4.802
 			H640.35c3.053,0,4.365,1.749,4.365,4.802V182.339z"
           />
-          <Rect
-            fill={fill}
-            x="475.031"
-            y="286.593"
-            width="48.418"
-            height="396.942"
-          />
-          <Rect
-            fill={fill}
-            x="363.361"
-            y="286.593"
-            width="48.418"
-            height="396.942"
-          />
-          <Rect
-            fill={fill}
-            x="251.69"
-            y="286.593"
-            width="48.418"
-            height="396.942"
-          />
+          <Rect fill={fill} x="475.031" y="286.593" width="48.418" height="396.942" />
+          <Rect fill={fill} x="363.361" y="286.593" width="48.418" height="396.942" />
+          <Rect fill={fill} x="251.69" y="286.593" width="48.418" height="396.942" />
         </G>
       </Svg>
     )
@@ -569,11 +557,7 @@ export class SVG {
   static Pencil(height = 28, fill = '#fff') {
     const aspectRatio = 28 / 28
     return (
-      <Svg
-        width={height * aspectRatio}
-        height={height}
-        viewBox="0 0 190.59 252.89"
-      >
+      <Svg width={height * aspectRatio} height={height} viewBox="0 0 190.59 252.89">
         <G>
           <Path
             fill={fill}
@@ -671,10 +655,7 @@ export class SVG {
     return (
       <Svg width={height * aspectRatio} height={height} viewBox="0 0 128 128">
         <G>
-          <Polygon
-            fill="white"
-            points="72.5,1.8 26,51.4 42.3,56.3 26.9,98.2 74,46.3 56.3,41 	"
-          />
+          <Polygon fill="white" points="72.5,1.8 26,51.4 42.3,56.3 26.9,98.2 74,46.3 56.3,41 	" />
           <Path
             fill={fill}
             d="M26.9,100c-0.3,0-0.7-0.1-1-0.3c-0.8-0.5-1.1-1.4-0.8-2.2l14.7-40.1l-14.5-4.3c-0.6-0.2-1.1-0.7-1.2-1.3
@@ -729,7 +710,8 @@ export class SVG {
         <Path
           fill={fill}
           d="M201.88,61.88a140,140,0,1,0,140,140A140,140,0,0,0,201.88,61.88ZM139.39,289.11l-24.75-24.75L264.37,114.64l24.75,24.75Z"
-          transform="translate(-61.88 -61.88)"/>
+          transform="translate(-61.88 -61.88)"
+        />
       </Svg>
     )
   }
@@ -909,9 +891,12 @@ export class SVG {
           </G>
         </G>
         <G>
-          <Circle 
-            // class="st1" 
-            cx="50" cy="94.3" r="5.7" />
+          <Circle
+            // class="st1"
+            cx="50"
+            cy="94.3"
+            r="5.7"
+          />
         </G>
       </Svg>
     )
@@ -986,9 +971,7 @@ export class SVG {
 
   static StackLogo(height = 28, fill = '#fff') {
     const aspectRatio = 28 / 28
-    return (
-      <Svg width={height * aspectRatio} height={height} viewBox="0 0 256 256" />
-    )
+    return <Svg width={height * aspectRatio} height={height} viewBox="0 0 256 256" />
   }
 
   static Lightbulb(height = 28, fill = '#fff') {
@@ -1051,21 +1034,18 @@ export class SVG {
     const aspectRatio = 28 / 28
     return (
       <Svg width={height * aspectRatio} height={height} viewBox="0 0 288 288">
-        <LinearGradient
-          id="userSpaceOnUse"
-          x1="41.1019"
-          y1="41.1019"
-          x2="268.6982"
-          y2="268.6982"
-        >
+        <LinearGradient id="userSpaceOnUse" x1="41.1019" y1="41.1019" x2="268.6982" y2="268.6982">
           <Stop offset="25%" stopOpacity="1" stopColor="#8A84D6" />
           <Stop offset="36%" stopOpacity="1" stopColor="#8A8FD6" />
           <Stop offset="72%" stopOpacity="1" stopColor="#8AAED6" />
           <Stop offset="93%" stopOpacity="1" stopColor="#8AB9D6" />
         </LinearGradient>
-        <Circle 
+        <Circle
           // class="st0"
-          cx="144" cy="144" r="142.8" />
+          cx="144"
+          cy="144"
+          r="142.8"
+        />
 
         <Path
           // class="st1"
@@ -1238,9 +1218,12 @@ export class SVG {
           </G>
         </G>
         <G>
-          <Circle 
+          <Circle
             // class="st1"
-            cx="51.1" cy="94.7" r="5.3" />
+            cx="51.1"
+            cy="94.7"
+            r="5.3"
+          />
         </G>
       </Svg>
     )
@@ -1480,9 +1463,10 @@ export class SVG {
       <Svg width={height * aspectRatio} height={height} viewBox="0 0 128 128">
         <G>
           <Circle fill={fill} cx="50" cy="50" r="50" />
-          <Polyline 
+          <Polyline
             // class="st1"
-            points="28.3,55.4 42.3,69.4 74.9,36.8 " />
+            points="28.3,55.4 42.3,69.4 74.9,36.8 "
+          />
         </G>
       </Svg>
     )
@@ -1525,9 +1509,10 @@ export class SVG {
       <Svg width={height * aspectRatio} height={height} viewBox="0 0 128 128">
         <G>
           <Circle fill={fill} cx="50" cy="50" r="50" />
-          <Polyline 
+          <Polyline
             // class="st1"
-            points="28.3,55.4 42.3,69.4 74.9,36.8 	" />
+            points="28.3,55.4 42.3,69.4 74.9,36.8 	"
+          />
         </G>
       </Svg>
     )
@@ -1546,9 +1531,10 @@ export class SVG {
 		l-0.4-4.9c-0.2-3-1.4-5.9-3.4-8.3l-3.2-3.7C-1.2,54-1.2,46,3.5,40.6l3.2-3.7c2-2.3,3.2-5.2,3.4-8.3l0.4-4.9
 		C11,16.6,16.6,11,23.8,10.4l4.9-0.4c3-0.2,5.9-1.4,8.3-3.4l3.7-3.2C46-1.2,54-1.2,59.4,3.5z"
           />
-          <Polyline 
+          <Polyline
             // class="st1"
-            points="28.4,50.2 41.3,63.1 71.2,33.1 	" />
+            points="28.4,50.2 41.3,63.1 71.2,33.1 	"
+          />
         </G>
       </Svg>
     )
@@ -1564,9 +1550,10 @@ export class SVG {
             points="50,0 65.3,13 85.4,14.6 87,34.7 100,50 87,65.3 85.4,85.4 65.3,87 50,100 34.7,87 14.6,85.4 13,65.3
                         0,50 13,34.7 14.6,14.6 34.7,13 	"
           />
-          <Polyline 
+          <Polyline
             // class="st1"
-            points="30.2,50.2 42,62 69.5,34.5 	" />
+            points="30.2,50.2 42,62 69.5,34.5 	"
+          />
         </G>
       </Svg>
     )
