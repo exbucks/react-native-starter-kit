@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Image, TouchableOpacity, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import Modal from 'react-native-modal'
-import Icons from 'react-native-vector-icons/FontAwesome'
-import { Icon } from '../components'
+import SVG from '../components/shared/svg/svg'
 import { equals } from 'ramda'
+import { colors } from '../themes'
 import * as screenStyles from './app-controls.styles'
 
 const HeaderLeft = () => (
@@ -18,7 +17,6 @@ const HeaderRight = ({ navigation }) => (
     <Image source={require('../assets/logo_title.png')} style={screenStyles.leftImage} />
   </View>
 )
-
 
 interface DSTabBarProps extends NavigationScreenProps {}
 interface DSTabBarState {
@@ -48,44 +46,24 @@ class ReelTabBar extends React.Component<DSTabBarProps, DSTabBarState> {
           style={screenStyles.tabItem}
           onPress={() => this.handlePressTabs('Explorer')}
         >
-          <Image
-            source={
-              equals(route, 'Explorer')
-                ? require('../assets/icon-manage-active.png')
-                : require('../assets/icon-manage-disabled.png')
-            }
-            style={screenStyles.tabManage}
-          />
-          <Text style={screenStyles.tabText}>Explorer</Text>
+          <View>
+            {equals(route, 'Explorer')
+              ? SVG.ExplorePlus(25, colors.grey)
+              : SVG.Explore(25, colors.darkgrey)}
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
-          style={screenStyles.tabItem}
+          style={screenStyles.tabCamera}
           onPress={() => this.handlePressTabs('Camera')}
         >
-          <Image
-            source={
-              equals(route, 'Camera')
-                ? require('../assets/icon-develop-active.png')
-                : require('../assets/icon-develop-disabled.png')
-            }
-            style={screenStyles.tabManage}
-          />
-          <Text style={screenStyles.tabText}>Camera</Text>
+          <View style={screenStyles.tabCameraView}>{SVG.CameraPlus(50, colors.grey)}</View>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={screenStyles.tabItem}
-          onPress={() => this.handlePressTabs('Home')}
-        >
-          <Image
-            source={
-              equals(route, 'Home')
-                ? require('../assets/icon-analytics-active.png')
-                : require('../assets/icon-analytics-disabled.png')
-            }
-            style={screenStyles.tabManage}
-          />
-          <Text style={screenStyles.tabText}>Home</Text>
+        <TouchableOpacity style={screenStyles.tabItem} onPress={() => this.handlePressTabs('Home')}>
+          <View>
+            {equals(route, 'Home') ? SVG.HomePlus(25, colors.grey) : SVG.Home(25, colors.darkgrey)}
+          </View>
         </TouchableOpacity>
+        <View style={screenStyles.tabBack} />
       </View>
     )
   }

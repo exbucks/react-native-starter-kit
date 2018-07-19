@@ -55,88 +55,40 @@ export const drawerContainer: ViewStyle = {
 
 export const tabContainer: ViewStyle = {
   flexDirection: 'row',
-  backgroundColor: colors.primary,
-  height: 70,
-  paddingBottom: 15,
-  paddingTop: 5,
-  paddingHorizontal: 0,
+  alignItems: 'flex-end',
+  backgroundColor: colors.white,
 }
 
 export const tabItem: ViewStyle = {
   flex: 1,
   alignItems: 'center',
   justifyContent: 'center',
+  height: 45,
 }
 
-export const tabText: TextStyle = {
-  color: colors.white,
-  fontSize: 10,
-  textAlign: 'center',
-  width: 70,
+export const tabCamera: ViewStyle = {
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: 50,
+  marginBottom: 10,
 }
 
-export const tabManage: ImageStyle = {
-  resizeMode: 'stretch',
-  tintColor: colors.white,
-  width: 27,
-  height: 27,
+export const tabCameraView: ViewStyle = {
+  width: 50,
+  height: 50,
+  borderRadius: 25,
+  backgroundColor: colors.tabBarColor,
 }
 
-export const tabCommunity: ImageStyle = {
-  resizeMode: 'stretch',
-  tintColor: colors.white,
-  width: 32,
-  height: 27,
-}
-
-export const tabAdd: ImageStyle = {
-  resizeMode: 'stretch',
-  tintColor: colors.white,
-  width: 27,
-  height: 27,
-}
-
-export const addModal: ViewStyle = {
-  marginLeft: 10,
-  marginRight: 10,
-  marginTop: 200,
-  marginBottom: 40,
-}
-
-export const modalRow: ViewStyle = {
-  flexDirection: 'row',
-  backgroundColor: colors.primary,
-  marginHorizontal: 10,
-  marginBottom: 2,
-  paddingVertical: 15,
-  paddingLeft: 100,
-}
-
-export const topRow: ViewStyle = {
-  flexDirection: 'row',
-  backgroundColor: colors.primary,
-  borderTopLeftRadius: 15,
-  borderTopRightRadius: 15,
-  marginHorizontal: 10,
-  marginBottom: 2,
-  paddingLeft: 100,
-  paddingVertical: 15,
-}
-
-export const bottomRow: ViewStyle = {
-  flexDirection: 'row',
-  backgroundColor: colors.primary,
-  borderBottomLeftRadius: 15,
-  borderBottomRightRadius: 15,
-  marginHorizontal: 10,
-  marginBottom: 2,
-  paddingLeft: 100,
-  paddingVertical: 15,
-}
-
-export const modalText: TextStyle = {
-  color: colors.white,
-  fontWeight: '700',
-  fontSize: 16,
-  paddingLeft: 10,
+export const tabBack: ViewStyle = {
+  position: 'absolute',
+  bottom: 0,
+  height: 45,
+  left: 0,
+  right: 0,
+  zIndex: -1,
+  borderTopWidth: 1,
+  borderColor: colors.lightergrey,
+  backgroundColor: colors.tabBarColor,
 }
