@@ -20,15 +20,13 @@ export const backgroundImage: ImageStyle = {
 }
 
 export const logoText: TextStyle = {
-  backgroundColor: 'transparent',
+  width: '100%',
+  textAlign: 'center',
   position: 'absolute',
   top: window.height / 2 - 230,
-  left: window.width / 2,
-  marginLeft: -80,
   fontFamily: 'Pacifico',
   fontSize: 90,
   color: colors.white,
-  padding: 5,
   textShadowRadius: 2,
   textShadowColor: colors.shadowColor,
   textShadowOffset: { width: 1, height: 1 },

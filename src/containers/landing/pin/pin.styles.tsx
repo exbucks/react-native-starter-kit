@@ -1,5 +1,6 @@
 import { ViewStyle, TextStyle, ImageStyle, Dimensions } from 'react-native'
 import { colors } from '../../../themes'
+import { isAndroid } from '../../../services'
 const window = Dimensions.get('window')
 
 export const ROOT: ViewStyle = {
@@ -11,11 +12,10 @@ export const ROOT: ViewStyle = {
 }
 
 export const logoText: TextStyle = {
-  backgroundColor: 'transparent',
+  width: '100%',
+  textAlign: 'center',
   position: 'absolute',
-  top: window.height / 2 - 230,
-  left: window.width / 2,
-  marginLeft: -80,
+  top: isAndroid() ? window.height / 2 - 250 : window.height / 2 - 230,
   fontFamily: 'Pacifico',
   fontSize: 90,
   color: colors.white,
@@ -39,8 +39,9 @@ export const backgroundImage: ImageStyle = {
 export const introText: TextStyle = {
   color: colors.white,
   textAlign: 'center',
-  fontSize: 15,
+  fontSize: isAndroid() ? 14 : 15,
   width: '85%',
+  minHeight: 40,
 }
 
 export const middleArea: ViewStyle = {
@@ -74,6 +75,8 @@ export const sendButton: ViewStyle = {
   borderRadius: 20,
   height: 40,
   margin: 5,
+  borderWidth: 1,
+  borderColor: colors.transparent,
 }
 
 export const buttonText: TextStyle = {
@@ -96,4 +99,11 @@ export const bottomText: TextStyle = {
   color: colors.white,
   fontSize: 14,
   marginRight: 10,
+}
+
+export const errroText: TextStyle = {
+  color: colors.red,
+  fontSize: 14,
+  textAlign: 'center',
+  fontFamily: 'Varela Round',
 }

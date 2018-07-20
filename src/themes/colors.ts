@@ -12,6 +12,7 @@ const colors = {
   purple: '#8A84D6',
   shadowColor: '#00000020',
   grey33: '#4040433',
+  tabBarColor: '#F9FAF9',
 }
 
 export default colors

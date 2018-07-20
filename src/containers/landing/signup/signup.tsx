@@ -2,57 +2,41 @@ import * as React from 'react'
 import { Text, TouchableOpacity, View, TextInput, Keyboard, Alert, Linking } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
-import { create } from 'apisauce'
-import * as qs from 'query-string'
 import AppActions from '../../../actions/app'
+import AuthActions from '../../../actions/auth'
 import * as screenStyles from './signup.styles'
 import { colors } from '../../../themes'
 import { KeyboardSpacer } from '../../../components'
 
 export interface SignupScreenProps extends NavigationScreenProps<{}> {
-  status: boolean
-  loginRequest?: () => void
+  status: string
+  message: string
+  usernameRequest?: (e: any) => void
+  signupRequest?: (e: any) => void
 }
 
 export interface SignupScreenState {
-  isBusy: boolean,
-  phoneNumber: string,
-  username: string,
-  firstName: string,
-  lastName: string,
-  checkingName: boolean,
-  nameAvailability: boolean,
-  errorMessage: string,
+  isBusy: boolean
+  phoneNumber: string
+  username: string
+  firstName: string
+  lastName: string
 }
 
 class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
-  api: any
-  AUTH_KEY: string = 'ffaf4b736f342c3c3aace3d86fb72341'
-  BASE_URL: string = 'https://www.net-networking.com/mobile_api'
   termsUrl: string = 'https://www.reel-social.com/terms'
   privacyUrl: string = 'https://www.reel-social.com/privacy-policy'
 
   constructor(props) {
     super(props)
-    const phoneNumber = props.navigation.getParam('phoneNumber', '')
+    const phoneNumber = props.navigation.getParam('phone', '')
     this.state = {
       isBusy: false,
       phoneNumber: phoneNumber,
       username: '',
       firstName: '',
       lastName: '',
-      checkingName: false,
-      nameAvailability: false,
-      errorMessage: '',
     }
-
-    this.api = create({
-      baseURL: this.BASE_URL,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json',
-      },
-    })
   }
 
   closeKeyboard = () => {
@@ -63,21 +47,14 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
     this.props.navigation.navigate('main')
   }
 
-  onChangeUsername = async(username) => {
+  onChangeUsername = username => {
     username = username.replace(/\W/g, '')
 
-    this.setState({ username, checkingName: true })
-    const reqBody = qs.stringify({
+    this.setState({ username })
+    const payload = {
       handle: username,
-      AUTH_KEY: this.AUTH_KEY,
-    })
-
-    const response = await this.api.post('is_name_available', reqBody)
-    this.setState({ checkingName: false })
-    if (response) {
-      const nameAvailability = response.data.status === 'success'
-      this.setState({ nameAvailability })
     }
+    this.props.usernameRequest(payload)
   }
 
   showTermsAlert = () => {
@@ -87,98 +64,95 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
       'Do you agree to our terms of service?',
       [
         { text: 'Yes, agree!', onPress: () => this.signUp() },
-        { text: 'Don\'t agree!', onPress: () => console.log('Dont agree') },
+        { text: "Don't agree!", onPress: () => console.log('Dont agree') },
       ],
       { cancelable: false },
     )
   }
 
-  signUp = async() => {
+  signUp = async () => {
     this.closeKeyboard()
-
     const { username, firstName, lastName, phoneNumber } = this.state
-    const reqBody = qs.stringify({
-      AUTH_KEY: this.AUTH_KEY,
+    const payload = {
       first: firstName,
       ln: lastName,
       handle: username.toLowerCase(),
       pwd: phoneNumber,
       phone: phoneNumber,
-    })
-    const response = await this.api.post('create_user', reqBody)
-    console.log('*********', response)
-    if (response.data.status === 'success') {
-      this.gotoHome()
-    } else {
-      this.setState({ errorMessage: response.data.message })
     }
+    this.props.signupRequest(payload)
   }
 
   gotoTerms = () => {
     Linking.openURL(this.termsUrl)
-  }  
+  }
 
   gotoPrivacy = () => {
     Linking.openURL(this.privacyUrl)
   }
 
   render() {
-    const { checkingName, nameAvailability, username, firstName, lastName, errorMessage } = this.state
+    const { username, firstName, lastName, phoneNumber } = this.state
+    const { status, message } = this.props
     return (
       <View style={screenStyles.ROOT}>
         <View style={screenStyles.contentContainer}>
           <Text style={screenStyles.logoText}>reel</Text>
           <Text style={screenStyles.introText}>Last step!</Text>
-          {checkingName ? (
+          {status === 'checking' && (
             <Text style={screenStyles.availabilityText}>Checking availability</Text>
-          ) : (
-            <Text style={screenStyles.availabilityText}>{''}</Text>
           )}
-          {!nameAvailability && username !='' ? (
-            <Text style={screenStyles.availabilityText}>{`Username ${username} is already taken`}</Text>
-          ) : (
-            <Text style={screenStyles.availabilityText}>{''}</Text>
-          )}
+          {status === 'unavailable' &&
+            username != '' && (
+              <Text
+                style={screenStyles.availabilityText}
+              >{`Username ${username} is already taken`}</Text>
+            )}
           <TextInput
             autoCapitalize="none"
             value={username}
             onChangeText={this.onChangeUsername}
             placeholder="Username"
-            style={[screenStyles.nameTextInput, {borderColor: !nameAvailability && username ? colors.red : colors.lightergrey}]}
+            style={[
+              screenStyles.nameTextInput,
+              {
+                borderColor: status === 'unavailable' && username ? colors.red : colors.lightergrey,
+              },
+            ]}
             underlineColorAndroid={colors.transparent}
-            returnKeyType='done'
+            returnKeyType="done"
           />
           <TextInput
             value={firstName}
             onChangeText={firstName => this.setState({ firstName })}
             placeholder="First Name"
-            style={[screenStyles.nameTextInput, {borderColor: colors.lightergrey}]}
+            style={[screenStyles.nameTextInput, { borderColor: colors.lightergrey }]}
             autoCapitalize="none"
             underlineColorAndroid={colors.transparent}
-            returnKeyType='done'
+            returnKeyType="done"
           />
           <TextInput
             value={lastName}
             onChangeText={lastName => this.setState({ lastName })}
             placeholder="Last Name"
-            style={[screenStyles.nameTextInput, {borderColor: colors.lightergrey}]}
+            style={[screenStyles.nameTextInput, { borderColor: colors.lightergrey }]}
             autoCapitalize="none"
             underlineColorAndroid={colors.transparent}
-            returnKeyType='done'
+            returnKeyType="done"
           />
-          {errorMessage !='' && (
-            <Text style={screenStyles.errorText}>{errorMessage}</Text>
-          )}
+          {message != '' && <Text style={screenStyles.errorText}>{message}</Text>}
           <TouchableOpacity
             style={screenStyles.createButton}
             onPress={this.showTermsAlert}
-            disabled={!nameAvailability || firstName==='' || lastName===''}
+            disabled={
+              status === 'unavailable' || username === '' || firstName === '' || lastName === ''
+            }
           >
-            <Text style={screenStyles.buttonText}>Create Account</Text>
+            <Text style={screenStyles.buttonText}>{`Create Account`}</Text>
           </TouchableOpacity>
         </View>
         <View style={screenStyles.bottomArea}>
-          <Text style={screenStyles.introText}>By creating an account, you agree to our</Text>
+          <Text style={screenStyles.introText}>{`By creating an account, you agree to our`}</Text>
           <View style={screenStyles.linkArea}>
             <TouchableOpacity onPress={this.gotoTerms}>
               <Text style={screenStyles.linkText}>Terms of Service</Text>
@@ -189,7 +163,14 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
             </TouchableOpacity>
           </View>
         </View>
-        <KeyboardSpacer />
+        <View style={screenStyles.LoginArea}>
+          <Text style={screenStyles.bottomText}>{`Already have an account?`}</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('login', { phone: phoneNumber })}
+          >
+            <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>{`Log in!`}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -197,10 +178,15 @@ class SignUp extends React.Component<SignupScreenProps, SignupScreenState> {
 
 const mapStateToProps = state => ({
   status: state.app.status,
+  message: state.auth.message,
 })
 
 const mapDispatchToProps = dispatch => ({
-  loginRequest: () => dispatch(AppActions.loginRequest()),
+  usernameRequest: (payload: any) => dispatch(AppActions.usernameRequest(payload)),
+  signupRequest: (payload: any) => dispatch(AuthActions.signupRequest(payload)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SignUp)

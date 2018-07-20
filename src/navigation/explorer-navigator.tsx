@@ -13,7 +13,7 @@ const ExplorerNavigator = StackNavigator(
   },
   {
     initialRouteName: 'explorer_main',
-    navigationOptions: {}
+    navigationOptions: {},
   },
 )
 

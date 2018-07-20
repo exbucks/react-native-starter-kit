@@ -3,26 +3,24 @@ import { Alert, Text, TouchableOpacity, View, Image, Button, TextInput } from 'r
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import { parseNumber, formatNumber } from 'libphonenumber-js'
-import { equals } from 'ramda'
 import AuthActions from '../../../actions/auth'
 import { BackButton } from '../../../components/shared'
 import { colors } from '../../../themes'
 import * as screenStyles from './pin.styles'
 
 export interface PINScreenProps extends NavigationScreenProps<{}> {
-  status: boolean
+  status: string
   pin: string
   gettokenRequest?: (payload: any) => void
-  checktokenRequest?: (payload: any) => void
 }
 
 export interface PINScreenState {
   routed: string
   countryCode: string
   phoneNumber: string
-  validNumber: boolean
   phoneNumberSubmitted: boolean
   verificationCode: Array<string>
+  invalidCode: boolean
 }
 
 class PIN extends React.Component<PINScreenProps, PINScreenState> {
@@ -35,9 +33,9 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
       routed: routedFrom,
       countryCode: '+1',
       phoneNumber: '',
-      validNumber: false,
       phoneNumberSubmitted: false,
       verificationCode: ['', '', '', '', '', ''],
+      invalidCode: false,
     }
     this.codeInput = []
   }
@@ -65,8 +63,7 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
   }
 
   onChangePhoneNumber = phoneNumber => {
-    const validNumber = phoneNumber.length === 10
-    this.setState({ phoneNumber, validNumber })
+    this.setState({ phoneNumber })
   }
 
   onChangeVerificationCode = (index, text) => {
@@ -84,13 +81,18 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
   }
 
   checkVerificationCode = () => {
-    const { phoneNumber, verificationCode, routed } = this.state
-
-    const payload = {
-      phone: phoneNumber,
-      verification: verificationCode.join(''),
+    const { verificationCode, routed, phoneNumber } = this.state
+    const { pin } = this.props
+    const code = pin.match(/\d/g).join('')
+    if (code == verificationCode.join('')) {
+      if (routed === 'login') {
+        this.props.navigation.navigate('login', { phone: phoneNumber })
+      } else {
+        this.props.navigation.navigate('signup', { phone: phoneNumber })
+      }
+    } else {
+      this.setState({ invalidCode: true })
     }
-    this.props.checktokenRequest(payload)
   }
 
   submitNumber = () => {
@@ -113,146 +115,177 @@ class PIN extends React.Component<PINScreenProps, PINScreenState> {
     this.submitNumber()
   }
 
-  render() {
-    const { navigation, status } = this.props
-    const { routed, phoneNumberSubmitted, countryCode, phoneNumber, validNumber } = this.state
-
-    let bgImage = null
-    let sendButtonStyle = null
-
+  backgroundImage = () => {
+    const { routed } = this.state
     if (routed === 'login') {
-      bgImage = (
+      return (
         <Image
           resizeMode="cover"
           style={screenStyles.backgroundImage}
           source={require('../../../assets/img/girl.jpg')}
         />
       )
-      sendButtonStyle = {
-        backgroundColor: colors.purple,
-      }
     } else {
-      sendButtonStyle = {
-        borderWidth: 1,
-        borderColor: colors.white,
+      return null
+    }
+  }
+
+  introText = () => {
+    const { routed, phoneNumberSubmitted } = this.state
+    let introText = ''
+    if (phoneNumberSubmitted) {
+      introText = 'Please enter the six-digit verification code sent to the number provided'
+    } else {
+      if (routed === 'login') {
+        introText = 'Enter the phone number associated with your account!'
+      } else {
+        introText = "Let's get you verified!"
       }
     }
+    return introText
+  }
 
-    let introText = ''
+  bottomArea = () => {
+    const { routed, phoneNumberSubmitted } = this.state
+
     let bottomText = ''
     let bottomBtnText = ''
     if (phoneNumberSubmitted) {
-      introText = 'Please enter the six-digit verification code sent to the number provided'
       bottomText = 'Wrong number?'
       bottomBtnText = 'Go back!'
     } else {
       if (routed === 'login') {
-        introText = 'Enter the phone number associated with your account!'
         bottomText = "Don't you have an account?"
         bottomBtnText = 'Create one!'
       } else {
-        introText = "Let's get you verified!"
         bottomText = 'Already have an account?'
         bottomBtnText = 'Log In!'
       }
     }
 
+    return (
+      <View style={screenStyles.bottomArea}>
+        <Text style={screenStyles.bottomText}>{bottomText}</Text>
+        <TouchableOpacity onPress={() => this.onSwitch()}>
+          <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>{bottomBtnText}</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  phonenumberArea = () => {
+    const { routed, countryCode, phoneNumber } = this.state
+    return (
+      <View style={screenStyles.middleArea}>
+        <View style={screenStyles.codeArea}>
+          <TextInput
+            style={screenStyles.codeTextInput}
+            width={60}
+            value={countryCode}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            keyboardType="phone-pad"
+            maxLength={4}
+            onChangeText={this.onChangeCountryCode}
+          />
+          <TextInput
+            style={[screenStyles.codeTextInput, { textAlign: 'left', paddingLeft: 20 }]}
+            placeholder="Phone Number"
+            width="73%"
+            underlineColorAndroid="rgba(0,0,0,0)"
+            keyboardType="phone-pad"
+            value={phoneNumber}
+            maxLength={14}
+            onChangeText={this.onChangePhoneNumber}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => this.submitNumber()}
+          style={[
+            screenStyles.sendButton,
+            {
+              backgroundColor: routed === 'login' ? colors.purple : colors.transparent,
+              borderColor: routed === 'login' ? colors.transparent : colors.white,
+            },
+          ]}
+          disabled={phoneNumber.length !== 10}
+        >
+          <Text style={screenStyles.buttonText}>{`Send Verification`}</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  verificationCodeArea = () => {
     const listArrary = [0, 1, 2, 3, 4, 5]
+    const { verificationCode } = this.state
+    return (
+      <View style={screenStyles.codeArea}>
+        {listArrary.map(key => {
+          return (
+            <TextInput
+              onFocus={() => {
+                verificationCode[key] = ''
+                this.setState({ verificationCode, invalidCode: false })
+              }}
+              ref={input => {
+                this.codeInput.push(input)
+              }}
+              maxLength={1}
+              key={`code-input-${key}`}
+              value={verificationCode[key]}
+              onChangeText={text => this.onChangeVerificationCode(key, text)}
+              underlineColorAndroid="rgba(0,0,0,0)"
+              keyboardType="phone-pad"
+              style={screenStyles.codeTextInput}
+              width={40}
+            />
+          )
+        })}
+      </View>
+    )
+  }
+
+  render() {
+    const { navigation } = this.props
+    const { phoneNumberSubmitted, invalidCode } = this.state
 
     return (
       <View style={screenStyles.ROOT}>
-        {bgImage}
+        {this.backgroundImage()}
         <BackButton onBack={() => navigation.goBack()} />
         <Text style={screenStyles.logoText}>{'reel'}</Text>
-        <Text style={screenStyles.introText}>{introText}</Text>
+        <Text style={screenStyles.introText}>{this.introText()}</Text>
         {phoneNumberSubmitted ? (
           <View>
-            <View style={screenStyles.codeArea}>
-              {listArrary.map(key => {
-                return (
-                  <TextInput
-                    onFocus={() => {
-                      const { verificationCode } = this.state
-                      verificationCode[key] = ''
-                      this.setState({ verificationCode })
-                    }}
-                    ref={input => {
-                      this.codeInput.push(input)
-                    }}
-                    maxLength={1}
-                    key={`code-input-${key}`}
-                    value={this.state.verificationCode[key]}
-                    onChangeText={text => this.onChangeVerificationCode(key, text)}
-                    underlineColorAndroid="rgba(0,0,0,0)"
-                    keyboardType="phone-pad"
-                    style={screenStyles.codeTextInput}
-                    width={40}
-                  />
-                )
-              })}
-            </View>
-            {equals(status, 'error') && <Text>That code is invalid. Please try again</Text>}
+            {this.verificationCodeArea()}
+            {invalidCode && (
+              <Text style={screenStyles.errroText}>{`That code is invalid. Please try again`}</Text>
+            )}
             <TouchableOpacity
               onPress={() => this.resendCode()}
               style={[screenStyles.sendButton, { marginTop: 0 }]}
             >
               <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>
-                Resend Verification
+                {`Resend Verification`}
               </Text>
             </TouchableOpacity>
           </View>
         ) : (
-          <View style={screenStyles.middleArea}>
-            <View style={screenStyles.codeArea}>
-              <TextInput
-                style={screenStyles.codeTextInput}
-                width={60}
-                value={countryCode}
-                underlineColorAndroid="rgba(0,0,0,0)"
-                keyboardType="phone-pad"
-                maxLength={4}
-                onChangeText={this.onChangeCountryCode}
-              />
-              <TextInput
-                style={[screenStyles.codeTextInput, { textAlign: 'left' }]}
-                placeholder="Phone Number"
-                width="73%"
-                underlineColorAndroid="rgba(0,0,0,0)"
-                keyboardType="phone-pad"
-                value={phoneNumber}
-                maxLength={14}
-                onChangeText={this.onChangePhoneNumber}
-              />
-            </View>
-
-            <TouchableOpacity
-              onPress={() => this.submitNumber()}
-              style={[screenStyles.sendButton, sendButtonStyle]}
-              disabled={!validNumber}
-            >
-              <Text style={screenStyles.buttonText}>Send Verification</Text>
-            </TouchableOpacity>
-          </View>
+          this.phonenumberArea()
         )}
-        <View style={screenStyles.bottomArea}>
-          <Text style={screenStyles.bottomText}>{bottomText}</Text>
-          <TouchableOpacity onPress={() => this.onSwitch()}>
-            <Text style={[screenStyles.buttonText, { fontWeight: 'bold' }]}>{bottomBtnText}</Text>
-          </TouchableOpacity>
-        </View>
+        {this.bottomArea()}
       </View>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  status: state.app.status,
+  status: state.auth.status,
   pin: state.auth.pin,
 })
 
 const mapDispatchToProps = dispatch => ({
   gettokenRequest: (payload: any) => dispatch(AuthActions.gettokenRequest(payload)),
-  checktokenRequest: (payload: any) => dispatch(AuthActions.checktokenRequest(payload)),
 })
 
 export default connect(

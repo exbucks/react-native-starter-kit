@@ -13,7 +13,7 @@ const ExplorerNavigator = StackNavigator(
   },
   {
     initialRouteName: 'camera_main',
-    navigationOptions: {}
+    navigationOptions: {},
   },
 )
 

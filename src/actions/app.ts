@@ -5,6 +5,16 @@ const { Types, Creators } = createActions({
   loginRequest: ['payload'],
   loginSuccess: null,
   loginFailure: null,
+
+  // Get Profile
+  getprofileRequest: ['payload'],
+  getprofileSuccess: ['response'],
+  getprofileFailure: null,
+
+  // Username availability
+  usernameRequest: ['payload'],
+  usernameSuccess: null,
+  usernameFailure: null,
 })
 
 export const AppTypes = Types

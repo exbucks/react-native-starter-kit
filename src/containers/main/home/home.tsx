@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, StatusBar } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import AppActions from '../../../actions/app'
@@ -18,6 +18,7 @@ class Add extends React.Component<HomeScreenProps, HomeScreenState> {
   constructor(props) {
     super(props)
     this.state = { isBusy: false }
+    StatusBar.setBarStyle('default')
   }
 
   toLogin = () => {
@@ -43,4 +44,7 @@ const mapDispatchToProps = dispatch => ({
   loginRequest: () => dispatch(AppActions.loginRequest()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Add)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Add)
