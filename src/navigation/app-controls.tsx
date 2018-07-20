@@ -1,7 +1,13 @@
 import * as React from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import SVG from '../components/shared/svg/svg'
+import {
+  SVGExplore,
+  SVGExplorePlus,
+  SVGHome,
+  SVGHomePlus,
+  SVGCameraPlus,
+} from '../components/shared'
 import { equals } from 'ramda'
 import { colors } from '../themes'
 import * as screenStyles from './app-controls.styles'
@@ -48,19 +54,19 @@ class ReelTabBar extends React.Component<DSTabBarProps, DSTabBarState> {
         >
           <View>
             {equals(route, 'Explorer')
-              ? SVG.ExplorePlus(25, colors.grey)
-              : SVG.Explore(25, colors.darkgrey)}
+              ? SVGExplorePlus(25, colors.grey)
+              : SVGExplore(25, colors.darkgrey)}
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={screenStyles.tabCamera}
           onPress={() => this.handlePressTabs('Camera')}
         >
-          <View style={screenStyles.tabCameraView}>{SVG.CameraPlus(50, colors.grey)}</View>
+          <View style={screenStyles.tabCameraView}>{SVGCameraPlus(50, colors.grey)}</View>
         </TouchableOpacity>
         <TouchableOpacity style={screenStyles.tabItem} onPress={() => this.handlePressTabs('Home')}>
           <View>
-            {equals(route, 'Home') ? SVG.HomePlus(25, colors.grey) : SVG.Home(25, colors.darkgrey)}
+            {equals(route, 'Home') ? SVGHomePlus(25, colors.grey) : SVGHome(25, colors.darkgrey)}
           </View>
         </TouchableOpacity>
         <View style={screenStyles.tabBack} />
