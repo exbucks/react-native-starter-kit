@@ -1,14 +1,16 @@
 import apisauce from 'apisauce'
 import { isNil } from 'ramda'
 import * as qs from 'query-string'
+import setting from '../config/setting'
 
 const authenticated = payload => {
   if (isNil(payload)) payload = {}
-  payload.AUTH_KEY = 'ffaf4b736f342c3c3aace3d86fb72341'
+  payload.AUTH_KEY = setting.AUTH_KEY
   return qs.stringify(payload)
 }
 
-const create = (baseURL = 'https://www.net-networking.com/mobile_api/') => {
+const create = () => {
+  const baseURL = setting.BASE_URL
   const api = apisauce.create({
     baseURL,
     headers: {
