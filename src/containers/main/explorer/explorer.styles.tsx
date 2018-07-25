@@ -7,3 +7,13 @@ export const ROOT: ViewStyle = {
   justifyContent: 'center',
   backgroundColor: colors.white,
 }
+
+export const scrollContainer: ViewStyle = {
+  flex: 1,
+  width: '100%',
+}
+
+export const topContainer: ViewStyle = {
+  height: 125,
+  flexDirection: 'row',
+}
