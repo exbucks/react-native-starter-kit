@@ -5,17 +5,7 @@ import Icons from 'react-native-vector-icons/FontAwesome'
 import { Drawer } from '../../../navigation/app-controls'
 import * as screenStyles from './header.styles'
 
-export interface HeaderProps extends NavigationScreenProps {
-  title?: string
-  isDrawer?: boolean
-  onBack?: () => void
-}
-
-export class Header extends React.Component<HeaderProps, {}> {
-  public static defaultProps: Partial<HeaderProps> = {
-    isDrawer: true,
-  }
-
+export class Header extends React.Component {
   render() {
     const { navigation, title, onBack, isDrawer } = this.props
 

@@ -5,16 +5,8 @@ import { connect } from 'react-redux'
 import AppActions from '../../../actions/app'
 import * as screenStyles from './home.styles'
 
-export interface HomeScreenProps extends NavigationScreenProps<{}> {
-  status: boolean
-  loginRequest?: () => void
-}
 
-export interface HomeScreenState {
-  isBusy: boolean
-}
-
-class Add extends React.Component<HomeScreenProps, HomeScreenState> {
+class Add extends React.Component {
   constructor(props) {
     super(props)
     this.state = { isBusy: false }

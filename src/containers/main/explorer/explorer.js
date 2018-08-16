@@ -5,16 +5,8 @@ import { connect } from 'react-redux'
 import AppActions from '../../../actions/app'
 import * as screenStyles from './explorer.styles'
 
-export interface ExplorerScreenProps extends NavigationScreenProps<{}> {
-  status: boolean
-  loginRequest?: () => void
-}
 
-export interface ExplorerScreenState {
-  isBusy: boolean
-}
-
-class ExplorerScreen extends React.Component<ExplorerScreenProps, ExplorerScreenState> {
+class ExplorerScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = { isBusy: false }

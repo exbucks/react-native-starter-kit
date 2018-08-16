@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import RootContainer from './root-container'
 import { store, persistor } from '../reducers'
 
-class App extends React.Component<{}, {}> {
+class App extends React.Component {
   render() {
     return (
       <Provider store={store}>

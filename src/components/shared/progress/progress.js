@@ -1,12 +1,7 @@
 import * as React from 'react'
 import { ProgressViewIOS, ProgressBarAndroid, Platform, View } from 'react-native'
 
-interface ProgressBarProps {
-  progress?: number
-  color?: string
-}
-
-export class ProgressBar extends React.Component<ProgressBarProps, {}> {
+export class ProgressBar extends React.Component {
   render() {
     const { progress, color, ...props } = this.props
 

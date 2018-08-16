@@ -5,16 +5,8 @@ import { connect } from 'react-redux'
 import AppActions from '../../actions/app'
 import * as screenStyles from './launch.styles'
 
-export interface LaunchScreenProps extends NavigationScreenProps<{}> {
-  status: boolean
-  loginRequest?: () => void
-}
 
-export interface LaunchScreenState {
-  isBusy: boolean
-}
-
-class Launch extends React.Component<LaunchScreenProps, LaunchScreenState> {
+class Launch extends React.Component {
   constructor(props) {
     super(props)
     this.state = { isBusy: false }

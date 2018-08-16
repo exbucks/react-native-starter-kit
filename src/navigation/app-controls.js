@@ -20,13 +20,8 @@ const HeaderRight = ({ navigation }) => (
 )
 
 
-interface DSTabBarProps extends NavigationScreenProps {}
-interface DSTabBarState {
-  route: String
-  visible: boolean
-}
 
-class ReelTabBar extends React.Component<DSTabBarProps, DSTabBarState> {
+class ReelTabBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -3,14 +3,9 @@ import Icons from 'react-native-vector-icons/FontAwesome'
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-interface IconProps {
-  iconType?: 'font' | 'ionic' | 'material'
-  name?: string
-  size?: number
-  color?: string
-}
 
-export class Icon extends React.Component<IconProps, {}> {
+
+export class Icon extends React.Component {
   render() {
     const { iconType, name, size, color } = this.props
 
