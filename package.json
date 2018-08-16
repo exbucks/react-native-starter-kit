@@ -57,7 +57,7 @@
     "preset": "jest-preset-typescript-react-native",
     "setupFiles": [
       "<rootDir>/node_modules/react-native/jest/setup.js",
-      "./test/setup.ts"
+      "./test/setup.js"
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|react-navigation)"
