@@ -1,6 +1,0 @@
-export * from './text'
-export * from './keyboard'
-export * from './drawer'
-export * from './header'
-export * from './progress'
-export * from './icon'
