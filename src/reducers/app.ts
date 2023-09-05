@@ -1,4 +1,4 @@
-import * as actions from '../types/app'
+import * as actions from '../types/redux'
 
 export interface AppState {
     lyrics: string

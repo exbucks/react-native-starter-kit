@@ -2,7 +2,7 @@ import {put, call, takeEvery, all, fork} from 'redux-saga/effects'
 
 import {fetchLyrics} from '../services/app'
 import * as appActions from '../actions/app'
-import * as actionTypes from '../types/app'
+import * as actionTypes from '../types/redux'
 
 function* onLoadLyrics({artist, song}: actionTypes.GetLyricsAction) {
     try {

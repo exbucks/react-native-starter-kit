@@ -1,4 +1,4 @@
-import * as actions from '../types/app'
+import * as actions from '../types/redux'
 
 export function setLyrics(lyrics: string): actions.SetLyricsAction {
     return {

@@ -5,10 +5,14 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../types/app'
 import * as styles from './styles'
 
-function Login({ navigation }): JSX.Element {
-    const handlePress = () => navigation.navigate("Home")
+type Props = NativeStackScreenProps<RootStackParamList, "Login">;
+
+function Login({ navigation }: Props): JSX.Element {
+    const handlePress = () => navigation.navigate("Home", { userId: '1', sort: 'latest' })
 
     return (
         <SafeAreaView style={styles.container}>

@@ -8,12 +8,7 @@ import configureStore from './store';
 import HomeScreen from './containers/home'
 import LoginScreen from './containers/login'
 import RegisterScreen from './containers/register'
-
-type RootStackParamList = {
-  Login: undefined;
-  Register: undefined;
-  Home: {userId: string, sort: 'latest' | 'top'};
-}
+import { RootStackParamList } from './types/app'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const { store, persistor } = configureStore()
@@ -24,8 +19,8 @@ function App(): JSX.Element {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <RootStack.Navigator initialRouteName="Login">
-            <RootStack.Screen name="Home" component={HomeScreen} initialParams={{ userId: '0', sort: 'latest' }} />
             <RootStack.Screen name="Login" component={LoginScreen} />
+            <RootStack.Screen name="Home" component={HomeScreen} initialParams={{ userId: '0', sort: 'latest' }} />
             <RootStack.Screen name="Register" component={RegisterScreen} />
           </RootStack.Navigator>
         </NavigationContainer>
