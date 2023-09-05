@@ -1,43 +1,43 @@
-import * as actions from "../types/app";
+import * as actions from '../types/app'
 
 export function setLyrics(lyrics: string): actions.SetLyricsAction {
-  return {
-    type: actions.SET_LYRICS,
-    lyrics
-  };
+    return {
+        type: actions.SET_LYRICS,
+        lyrics
+    }
 }
 
 export function getLyrics(
-  artist: string,
-  song: string
+    artist: string,
+    song: string
 ): actions.GetLyricsAction {
-  return {
-    type: actions.GET_LYRICS,
-    artist,
-    song
-  };
+    return {
+        type: actions.GET_LYRICS,
+        artist,
+        song
+    }
 }
 
 export function getLyricsRequest(): actions.GetLyricsRequestAction {
-  return {
-    type: actions.GET_LYRICS_REQUEST
-  };
+    return {
+        type: actions.GET_LYRICS_REQUEST
+    }
 }
 
 export function getLyricsSuccess(
-  lyrics: string
+    lyrics: string
 ): actions.GetLyricsSuccessAction {
-  return {
-    type: actions.GET_LYRICS_SUCCESS,
-    lyrics
-  };
+    return {
+        type: actions.GET_LYRICS_SUCCESS,
+        lyrics
+    }
 }
 
 export function getLyricsFailure(
-  error: Error | string
+    error: Error | string
 ): actions.GetLyricsFailureAction {
-  return {
-    type: actions.GET_LYRICS_FAILURE,
-    error
-  };
+    return {
+        type: actions.GET_LYRICS_FAILURE,
+        error
+    }
 }
