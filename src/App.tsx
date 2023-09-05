@@ -17,7 +17,6 @@ import {
   View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import {
   Colors,
@@ -26,9 +25,9 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import rootReducer from './reducers'
+import configureStore from './store';
 
-const store = createStore(rootReducer)
+const store = configureStore()
 
 type SectionProps = PropsWithChildren<{
   title: string;

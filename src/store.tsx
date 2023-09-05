@@ -1,15 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit'
-import appReducer from './reducers/app'
-import devReducer from './reducers/dev'
+import { createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
 
-export const store = configureStore({
-  reducer: {
-    app: appReducer,
-    dev: devReducer
-  }
-})
+import rootReducer from "./reducers";
+import rootSaga from "./sagas";
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+const sagaMiddleware = createSagaMiddleware();
+
+const configureStore = () => {
+  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+  sagaMiddleware.run(rootSaga);
+  return store;
+};
+
+export default configureStore;
