@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import * as styles from './styles'
 
-function Home(): JSX.Element {
-    const handlePress = () => {}
+function Login({ navigation }): JSX.Element {
+    const handlePress = () => navigation.navigate("Home")
 
     return (
         <SafeAreaView style={styles.container}>
@@ -25,4 +25,4 @@ function Home(): JSX.Element {
     );
 }
 
-export default Home;
+export default Login;
